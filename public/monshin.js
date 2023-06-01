@@ -1,6 +1,6 @@
 // LIFFIDの設定
 $(document).ready(function () {
-    const liffId = "1660856020-9r4xpNbr";
+    const liffId = "1661289930-Mr5r5NbX";
     initializeLiff(liffId);
 })
 // LIFF初期化
