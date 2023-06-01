@@ -17,7 +17,13 @@ const connection = new Client({
     rejectUnauthorized: false
   }
 });
-connection.connect();
+connection.connect((err) => {
+  if (err) {
+    console.log('error connecting:' + err.stack);
+    return;
+  }
+  console.log('connecting success');
+});
 
 const config = {
   channelAccessToken: process.env.ACCESS_TOKEN,
