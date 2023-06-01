@@ -1,0 +1,209 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>問診</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        rossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <link rel="stylesheet" href="monshin.css">
+</head>
+
+<body>
+    <H2 style="text-align:center;">問診</H2>
+    <form class="w-75 mx-auto" id="form1">
+        <p style="color: red;">「*」のついた項目は必ず入力してください</p>
+        <div id="page01">
+            <p class="label_left" name="username" style="display: inline;">Q1-1.名前</p>
+            <p style="color: red; display: inline;">*</p>
+            <div style="margin: 10px 0px 20px 20px;">
+                <input class="form-control w-100 mt-1" id="username" name="page01" placeholder="" required>
+            </div>
+            <p class="label_left" name="birthday" style="display: inline;">Q1-2.生年月日</p>
+            <p style="color: red; display: inline;">*</p>
+            <div style="margin: 10px 0px 20px 20px;">
+                <input type="text" id="birthday_year" name="page01" style="width: 70px;" pattern="^[0-9]+$" required>年
+                <input type="text" id="birthday_month" name="page01" style="width: 70px;" pattern="^[0-9]+$" required>月
+                <input type="text" id="birthday_day" name="page01" style="width: 70px;" pattern="^[0-9]+$" required>日
+            </div>
+            <p class="label_left" name="height" style="display: inline;">Q1-3.身長</p>
+            <p style="color: red; display: inline;">*</p>
+            <div style="margin: 10px 0px 20px 20px;">
+                <input class="form-control w-100 mt-1" id="height" name="page01"
+                    style="width:75px!important; display: inline;" pattern="^[0-9]+$" required>cm
+            </div>
+            <p class="label_left" name="weight" style="display: inline;">Q1-4.体重</p>
+            <p style="color: red; display: inline;">*</p>
+            <div style="margin: 10px 0px 20px 20px;">
+                <input class="form-control w-100 mt-1" id="weight" name="page01"
+                    style="width:75px!important; display: inline;" pattern="^[0-9]+$" required>kg&nbsp;
+                <input type="checkbox" id="weight_check">
+                <label for="weight_check">変化なし</label>
+            </div>
+            <p class="label_left" name="waist">Q1-5.腹囲</p>
+            <div style="margin: 10px 0px 20px 20px;">
+                <input class="form-control w-100 mt-1" id="waist" name="page01"
+                    style="width:75px!important; display: inline;" pattern="^[0-9]+$" required>cm&nbsp;
+                <input type="checkbox" id="waist_check">
+                <label for="waist_check">変化なし</label>
+            </div>
+            <p class="label_left" name="bloodPressure">Q1-6.血圧</p>
+            <div style="margin: 10px 0px 20px 20px;">
+                <input class="form-control w-100 mt-1" id="bloodPressure" name="page01"
+                    style="width:75px!important; display: inline;" pattern="^[0-9]+$" required>mmHg&nbsp;
+                <input type="checkbox" id="bloodPressure_check">
+                <label for="bloodPressure_check">変化なし</label>
+            </div>
+            <p class="label_left" style="display: inline;">Q1-7.取組状況</p>
+            <!--<p style="color: red; display: inline;">*</p>-->
+            <div style="margin: 10px 0px 20px 20px;">
+                <input type="checkbox" name="initiative" id="meal" value="食事">
+                <label for="meal">食事</label><br>
+                <input type="checkbox" name="initiative" id="exercise" value="運動">
+                <label for="exercise">運動</label><br>
+                <!--<input type="checkbox" name="initiative" id="sonota_initiative" value="その他">-->
+                <label for="sonota_initiativeText">その他(自由記入欄)</label>
+                <textarea class="form-control w-100 mt-1" id="sonota_initiativeText" name="page01"
+                    style="width:100%!important;"></textarea>
+            </div>
+            <p class="label_left" style="display: inline;">Q1-8.健診後に医療機関を受信しましたか？</p>
+            <p style="color: red; display: inline;">*</p>
+            <div style="margin: 10px 0px 20px 20px;">
+                <input type="radio" name="kenshin_after" id="kenshin_after_yes" value="はい"
+                    onchange="displayQ9(this.value)">
+                <label for="kenshin_after_yes">はい</label><br>
+                <input type="radio" name="kenshin_after" id="kenshin_after_no" value="いいえ"
+                    onchange="displayQ9(this.value)">
+                <label for="kenshin_after_no">いいえ</label><br>
+            </div>
+            <p class="label_left" name="medicine" style="display: inline;">
+                Q1-9.血糖値、血圧、中性脂肪、コレステロールについてのお薬を飲み始めましたか？<br>(Q1-8で「はい」を選択した場合、お答えください)</p>
+            <p style="color: red; display: inline;">*</p>
+            <div style="margin: 10px 0px 20px 20px;">
+                <input type="radio" name="medicine" id="medicine_yes" value="はい" disabled>
+                <label for="medicine_yes">はい</label><br>
+                <input type="radio" name="medicine" id="medicine_no" value="いいえ" disabled>
+                <label for="medicine_no">いいえ</label><br>
+                <input type="radio" name="medicine" id="medicine_wakaranai" value="わからない" disabled>
+                <label for="medicine_wakaranai">わからない</label><br>
+            </div>
+            <button type="submit" class="btn btn-primary"
+                style="margin-top: 20px; margin-bottom: 20px;">次の質問へ進む</button>
+            <div style="text-align: center;">
+                <button type="button" class="btn" id="button1" style="text-align: center;" disabled>1</button>
+                <button type="button" class="btn btn-secondary" onclick="clickPage2Button()" id="button2"
+                    style="text-align: center;">2</button>
+            </div>
+
+        </div>
+    </form>
+    <div id="divPage"></div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        crossorigin="anonymous"></script>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+    <script type="text/javascript" src="monshin.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            // セッションから各取得
+            // 氏名
+            if (sessionStorage.getItem('username') != null) {
+                $('#username').val(sessionStorage.getItem('username'));
+            }
+            // 生年月日（年）
+            if (sessionStorage.getItem('birthday_year') != null) {
+                $('#birthday_year').val(sessionStorage.getItem('birthday_year'));
+            }
+            // 生年月日（月）
+            if (sessionStorage.getItem('birthday_month') != null) {
+                $('#birthday_month').val(sessionStorage.getItem('birthday_month'));
+            }
+            // 生年月日（日）
+            if (sessionStorage.getItem('birthday_day') != null) {
+                $('#birthday_day').val(sessionStorage.getItem('birthday_day'));
+            }
+            // 身長
+            if (sessionStorage.getItem('height') != null) {
+                $('#height').val(sessionStorage.getItem('height'));
+            }
+            // 体重
+            if (sessionStorage.getItem('weight') != null) {
+                $('#weight').val(sessionStorage.getItem('weight'));
+            }
+            // 体重（変化有無）
+            if (sessionStorage.getItem('weight_check') == '※変化なし') {
+                $('#weight_check').attr('checked', true);
+            } else {
+                $('#weight_check').attr('checked', false);
+            }
+            // 腹囲
+            if (sessionStorage.getItem('waist') != null) {
+                $('#waist').val(sessionStorage.getItem('waist'));
+            }
+            // 腹囲（変化有無）
+            if (sessionStorage.getItem('waist_check') == '※変化なし') {
+                $('#waist_check').attr('checked', true);
+            } else {
+                $('#waist_check').attr('checked', false);
+            }
+            // 血圧
+            if (sessionStorage.getItem('bloodPressure') != null) {
+                $('#bloodPressure').val(sessionStorage.getItem('bloodPressure'));
+            }
+            // 血圧（変化有無）
+            if (sessionStorage.getItem('bloodPressure_check') == '※変化なし') {
+                $('#bloodPressure_check').attr('checked', true);
+            } else {
+                $('#bloodPressure_check').attr('checked', false);
+            }
+            // 取組状況（食事）
+            if (sessionStorage.getItem('meal') != null) {
+                if (sessionStorage.getItem('meal') == 'true') {
+                    $('#meal').attr('checked', true);
+                } else {
+                    $('#meal').attr('checked', false);
+                }
+            }
+            // 取組状況（運動）
+            if (sessionStorage.getItem('exercise') != null) {
+                if (sessionStorage.getItem('exercise') == 'true') {
+                    $('#exercise').attr('checked', true);
+                } else {
+                    $('#exercise').attr('checked', false);
+                }
+            }
+            // その他自由記入欄
+            if (sessionStorage.getItem('sonota_initiativeText') != null) {
+                $('#sonota_initiativeText').val(sessionStorage.getItem('sonota_initiativeText'));
+            }
+            // 健診後
+            if (sessionStorage.getItem('kenshin_after') != null) {
+                if (sessionStorage.getItem('kenshin_after') == 'はい') {
+                    $('#kenshin_after_yes').attr('checked', true);
+                    $('#medicine_yes').attr('disabled', false);
+                    $('#medicine_no').attr('disabled', false);
+                    $('#medicine_wakaranai').attr('disabled', false);
+                } else if (sessionStorage.getItem('kenshin_after') == 'いいえ') {
+                    $('#kenshin_after_no').attr('checked', true);
+                }
+            }
+            // お薬の服用状況
+            if (sessionStorage.getItem('medicine') != null) {
+                if (sessionStorage.getItem('medicine') == 'はい') {
+                    $('#medicine_yes').attr('checked', true);
+                } else if (sessionStorage.getItem('medicine') == 'いいえ') {
+                    $('#medicine_no').attr('checked', true);
+                } else if (sessionStorage.getItem('medicine') == 'わからない') {
+                    $('#medicine_wakaranai').attr('checked', true);
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

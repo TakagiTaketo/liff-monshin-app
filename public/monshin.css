@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.label_left {
+    display: inline-block;
+    width: 100%;
+    border-left: solid 5px #5250e0;
+    padding-left: 15px;
+    vertical-align: top;
+    margin-bottom: 10px;
+    font-weight: bold;
+}

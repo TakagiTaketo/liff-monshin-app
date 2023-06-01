@@ -1,29 +1,23 @@
 {
   "name": "liff-monshin-app",
-  "description": "This repository is no longer actively maintained. Please refer [line/line-liff-v2-starter](https://github.com/line/line-liff-v2-starter) for this repository successor.",
+  "description": "liff-monshin-app",
   "version": "1.0.0",
   "engines": {
     "node": "16.x",
     "npm": "8.x"
   },
-  "main": "liff-starter.js",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "echo test.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/line/line-liff-starter.git"
-  },
-  "author": "",
+  "author": "takagi",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/line/line-liff-starter/issues"
-  },
-  "homepage": "https://github.com/line/line-liff-starter#readme",
   "dependencies": {
     "@line/bot-sdk": "^7.5.2",
-    "express": "^4.18.2"
-  },
-  "devDependencies": {},
-  "keywords": []
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.1",
+    "pg": "^8.11.0"
+  }
 }
