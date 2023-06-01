@@ -45,6 +45,31 @@ function initializeLiff(liffId) {
             console.log('LIFF Initialization failed ', err);
         });
 }
+
+function initializeApp() {
+    // ログインチェック
+    if (liff.isLoggedIn()) {
+        //ログイン済
+        //getLineData();
+        /*
+        liff.getProfile()
+            .then(profile => {
+                lineUserName = profile.displayName;
+                lineUserId = profile.userId;
+            })
+            .catch((err) => {
+                console.log("error", err);
+            })
+*/
+    } else {
+        // 未ログイン
+        let result = window.confirm("LINE Loginを行います。");
+        if (result) {
+            liff.login();
+        }
+    }
+}
+
 // メッセージ送信
 function sendText(text) {
     liff.sendMessages([
