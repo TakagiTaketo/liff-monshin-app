@@ -36,7 +36,9 @@ express()
   .use(express.json())
   .use(express.urlencoded({ extended: true }))
   .post('/api', (req, res) => getUserInfo(req, res))
-  //.post('/insertUser', (req, res) => insertUserInfo(req, res))
+  .post('/selectUser', (req, res) => selectUserInfo(req, res))
+  .post('/insertUser', (req, res) => insertUserInfo(req, res))
+  .post('/updateUser', (req, res) => updateUserInfo(req, res))
   .listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 const getUserInfo = (req, res) => {
@@ -76,28 +78,85 @@ const getUserInfo = (req, res) => {
     .catch(e => console.log(e));
 }
 
-// usersテーブルに追加する。
-/*
+// 初診かどうか判定する
+const selectUserInfo = (req, res) => {
+  const data = req.body;
+  let firstConsulFlg = false;
+  const select_query = {
+    text: `SELECT * FROM users WHERE name='${data.name} AND birthday='${data.birthday}';`
+  }
+  connection.query(select_query, function (error, results) {
+    req.connection.end;
+    if (error) throw error;
+    if (results.rows[0] != null) {
+      firstConsulFlg = false;
+      console.log('通院者');
+    } else if (results.rows[0] == null) {
+      firstConsulFlg = true;
+      console.log('初診');
+    }
+    res.status(200).send({ firstConsulFlg });
+  });
+
+}
+
+// ユーザー情報を追加する。
 const insertUserInfo = (req, res) => {
   const data = req.body;
-  console.log('line_uname:', data.line_uname);
-  console.log('line_uid:', data.line_uid);
-  const postData = `line_uid=${data.line_uid}&line_uname=${process.env.LOGIN_CHANNEL_ID}`;
+  // タイムスタンプ整形
+  let created_at = '';
+  let date = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000));
+  console.log('date:' + date);
+  created_at = date.getFullYear() + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/'
+    + ('0' + date.getDate()).slice(-2) + ' ' + ('0' + date.getHours()).slice(-2) + ':'
+    + ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
 
   const insert_query = {
-    text: `INSERT INTO users(line_uid, line_uname) VALUES ($1, $2);`,
-    values: [data.line_uid, data.line_uname]
+    text: `INSERT INTO users(line_uid, line_uname, name, birthday, height, weight, waist, blood_pressure, created_at, delete_flg) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`,
+    values: [data.line_uid, data.line_uname, data.name, data.birthday, data.height, data.weight, data.waist, data.blood_pressure, created_at, 0]
   };
 
   connection.query(insert_query)
     .then(() => {
-      console.log('insert successfully!!');
+      let message = 'userを追加しました';
+      res.status(200).send({ message });
     })
     .catch(e => {
       console.log(e);
-    });
+    })
+    .finally(() => {
+      req.connection.end;
+    })
 }
-*/
+
+// ユーザー情報を更新する
+const updateUserInfo = (req, res) => {
+  const data = req.body;
+  // タイムスタンプ整形
+  let updated_at = '';
+  let date = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000));
+  console.log('date:' + date);
+  updated_at = date.getFullYear() + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/'
+    + ('0' + date.getDate()).slice(-2) + ' ' + ('0' + date.getHours()).slice(-2) + ':'
+    + ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
+
+  const update_query = {
+    text: `UPDATE users SET height='${data.height}', weight='${data.weight}', waist='${data.waist}', blood_pressure='${data.blood_pressure}', updated_at='${updated_at}' WHERE name='${data.name}' AND birthday='${data.birthday} AND delete_flg=0';`
+  };
+
+  connection.query(update_query)
+    .then(() => {
+      let message = 'userを更新しました';
+      res.status(200).send({ message });
+    })
+    .catch(e => {
+      console.log(e);
+    })
+    .finally(() => {
+      req.connection.end;
+    })
+}
+
 /*
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')

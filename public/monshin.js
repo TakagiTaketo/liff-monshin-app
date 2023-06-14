@@ -1,6 +1,10 @@
+import { json } from "express";
+
+let line_uid = '';
+let line_uname = '';
+const liffId = "1661289930-Mr5r5NbX";
 // LIFFIDの設定
 $(document).ready(function () {
-    const liffId = "1661289930-Mr5r5NbX";
     initializeLiff(liffId);
 })
 // LIFF初期化
@@ -30,11 +34,6 @@ function initializeLiff(liffId) {
                             console.log('json:' + json);
                             const line_uname = json.line_uname;
                             const line_uid = json.line_uid;
-
-                            const pElement2 = document.createElement('p');
-                            const divPage = document.getElementById('divPage');
-                            pElement2.innerHTML = `あなたの名前は${line_uname}です。LINE IDは${line_uid}です。`;
-                            divPage.appendChild(pElement2);
                         })
                 })
                 .catch((err) => {
@@ -50,17 +49,6 @@ function initializeApp() {
     // ログインチェック
     if (liff.isLoggedIn()) {
         //ログイン済
-        //getLineData();
-        /*
-        liff.getProfile()
-            .then(profile => {
-                lineUserName = profile.displayName;
-                lineUserId = profile.userId;
-            })
-            .catch((err) => {
-                console.log("error", err);
-            })
-*/
     } else {
         // 未ログイン
         let result = window.confirm("LINE Loginを行います。");
@@ -172,15 +160,89 @@ $(function () {
         const msg = `問診記入\n氏名：${username}\n生年月日：${birthday}\n身長：${height}cm\n体重：${weight}kg${weight_check}\n腹囲：${waist}cm${waist_check}\n血圧：${bloodPressure}mmHg${bloodPressure_check}\n取組状況：${meal}\n${exercise}\n${sonota_initiativeText}\n\n${q1_8Text}\n${kenshin_after}\n\n${q1_9Text}\n${medicine}\n\n${q2_1Text}\n${q2_1_1Text}\n${q2_1_1}\n\n${q2_1_2Text}\n${q2_1_2}\n\n${q2_1_3Text}\n${q2_1_3}\n\n${q2_2Text}\n${q2_2}\n\n${q2_3Text}\n${q2_3}\n\n${q2_4Text}\n${q2_4}\n\n${q2_5Text}\n${q2_5}\n\nQ.その他質問事項等：${sonota}`;
         const medicine_msg = `問診記入\nお薬服用中\n氏名：${username}\n生年月日：${birthday}\n身長：${height}cm\n体重：${weight}kg${weight_check}\n腹囲：${waist}cm${waist_check}\n血圧：${bloodPressure}mmHg${bloodPressure_check}\n取組状況：${meal}\n${exercise}\n${sonota_initiativeText}\n\n${q1_8Text}\n${kenshin_after}\n\n${q1_9Text}\n${medicine}\n\n${q2_1Text}\n${q2_1_1Text}\n${q2_1_1}\n\n${q2_1_2Text}\n${q2_1_2}\n\n${q2_1_3Text}\n${q2_1_3}\n\n${q2_2Text}\n${q2_2}\n\n${q2_3Text}\n${q2_3}\n\n${q2_4Text}\n${q2_4}\n\n${q2_5Text}\n${q2_5}\n\nQ.その他質問事項等：${sonota}`;
 
-        // メッセージ送信
-        if (medicine == 'はい') {
-            sendText(medicine_msg);
-        } else {
-            sendText(msg);
-        }
+        const jsonData_selectuser = JSON.stringify({
+            name: username,
+            birthday: birthday
+        });
 
-        return false;
-    });
+        fetch('/selectUser', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: jsonData_selectuser,
+            credentials: 'same-origin'
+        })
+            .then(res => {
+                res.json()
+                    .then(json => {
+                        // jsonData作成
+                        const jsonData = JSON.stringify({
+                            line_uid: line_uid,
+                            line_uname: line_uname,
+                            name: username,
+                            birthday: birthday,
+                            height: height,
+                            weight: weight,
+                            waist: waist,
+                            blood_pressure: bloodPressure
+                        });
+
+                        if (json.firstConsulFlg) {
+                            fetch('/insertUser', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: jsonData,
+                                credentials: 'same-origin'
+                            })
+                                .then(() => {
+                                    // メッセージ送信
+                                    if (medicine == 'はい') {
+                                        sendText(medicine_msg);
+                                    } else {
+                                        sendText(msg);
+                                    }
+                                    return false;
+                                })
+                                .catch((err) => {
+                                    alert(err);
+                                })
+                        } else {
+                            fetch('/updateUser', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: jsonData,
+                                credentials: 'same-origin'
+                            })
+                                .then(() => {
+                                    // メッセージ送信
+                                    if (medicine == 'はい') {
+                                        sendText(medicine_msg);
+                                    } else {
+                                        sendText(msg);
+                                    }
+                                    return false;
+                                })
+                                .catch((err) => {
+                                    alert(err);
+                                })
+
+                        }
+
+                    })
+                    .catch((err) => {
+                        alert(err);
+                    });
+            })
+            .catch((err) => {
+                alert(err);
+            });
+    })
+
 });
 
 // 下部の1ページ目ボタン押下時
