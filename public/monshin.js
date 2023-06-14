@@ -30,8 +30,8 @@ function initializeLiff(liffId) {
                     res.json()
                         .then(json => {
                             console.log('json:' + json);
-                            const line_uname = json.line_uname;
-                            const line_uid = json.line_uid;
+                            line_uname = json.line_uname;
+                            line_uid = json.line_uid;
                         })
                 })
                 .catch((err) => {

@@ -81,6 +81,8 @@ const getUserInfo = (req, res) => {
 // 初診かどうか判定する
 const selectUserInfo = (req, res) => {
   const data = req.body;
+  console.log('selectUserInfo.name' + data.name);
+  console.log('selectUserInfo.birthday' + data.birthday);
   let firstConsulFlg = false;
   const select_query = {
     text: `SELECT * FROM users WHERE name='${data.name} AND birthday='${data.birthday}';`
