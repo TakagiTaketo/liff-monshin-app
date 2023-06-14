@@ -1,5 +1,3 @@
-import { json } from "express";
-
 let line_uid = '';
 let line_uname = '';
 const liffId = "1661289930-Mr5r5NbX";
