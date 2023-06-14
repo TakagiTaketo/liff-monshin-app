@@ -85,7 +85,7 @@ const selectUserInfo = (req, res) => {
   console.log('selectUserInfo.birthday' + data.birthday);
   let firstConsulFlg = false;
   const select_query = {
-    text: `SELECT * FROM users WHERE name='${data.name} AND birthday='${data.birthday}';`
+    text: `SELECT * FROM users WHERE name='${data.name}' AND birthday='${data.birthday}';`
   }
   connection.query(select_query, function (error, results) {
     req.connection.end;
