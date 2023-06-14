@@ -160,7 +160,7 @@ $(function () {
 
         const jsonData_selectuser = JSON.stringify({
             name: username,
-            birthday: sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month') + '-' + sessionStorage.getItem('birthday_day')
+            birthday: sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0")
         });
 
         fetch('/selectUser', {
