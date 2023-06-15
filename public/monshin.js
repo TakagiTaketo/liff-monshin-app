@@ -1,6 +1,6 @@
 let line_uid = '';
 let line_uname = '';
-const liffId = "1660856020-9r4xpNbr";
+const liffId = "1660856020-9r4xpNbr";//
 let dialog = document.querySelector('dialog');
 let dialog_send = $('#dialog_send');
 let dialog_close = $('#dialog_close');
