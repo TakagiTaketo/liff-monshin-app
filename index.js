@@ -80,8 +80,8 @@ const selectUserInfo = (req, res) => {
     if (error) throw error;
     if (results.rows[0] != null) {
       firstConsulFlg = false;
-      name = results[0].name;
-      birthday = results[0].birthday;
+      name = results.rows[0].name;
+      birthday = results.rows[0].birthday;
       console.log('通院者');
     } else if (results.rows[0] == null) {
       firstConsulFlg = true;
