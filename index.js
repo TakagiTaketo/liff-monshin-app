@@ -167,11 +167,12 @@ const updateUserInfo = (req, res) => {
     + ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
 
   const update_query = {
-    text: `UPDATE users SET height='${data.height}', weight='${data.weight}', waist='${data.waist}', blood_pressure='${data.blood_pressure}', updated_at='${updated_at}' WHERE name='${data.name}' AND birthday='${data.birthday} AND delete_flg=0';`
+    text: `UPDATE users SET height='${data.height}', weight='${data.weight}', waist='${data.waist}', blood_pressure='${data.blood_pressure}', updated_at='${updated_at}' WHERE name='${data.name}' AND birthday='${data.birthday}' AND delete_flg=0;`
   };
 
   connection.query(update_query)
     .then(() => {
+      console.log('userを更新しました。');
       let message = 'userを更新しました';
       res.status(200).send({ message });
     })
