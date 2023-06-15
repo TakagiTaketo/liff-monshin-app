@@ -185,7 +185,7 @@ $(function () {
                             waist: waist,
                             blood_pressure: bloodPressure
                         });
-
+                        console.log('json.firstConsulFlg:' + json.firstConsulFlg);
                         if (json.firstConsulFlg) {
                             fetch('/insertUser', {
                                 method: 'POST',
