@@ -91,33 +91,35 @@
                 <p id="sonota"></p>
             </div>
             <div style="text-align: center; font-size: 20px;">
-                <button type="button" class="btn btn-primary" onclick="sendResult(false)">送信</button>
-                <button type="button" class="btn btn-secondary" onclick="goPage2()">戻る</button>
+                <button type="button" class="btn btn-primary" onclick="sendResult(false)"
+                    style="padding: 10px 30px;">送信</button>
+                <button type="button" class="btn btn-secondary" onclick="goPage2()"
+                    style="padding: 10px 30px; margin-left: 20px;">戻る</button>
             </div>
         </div>
-        <dialog style="border: 2px solid black;">
-            <p style="font-size: 20px; text-align: center;">氏名、生年月日が初回時に入力されたものと異なります。<br>ご確認ください。</p>
-            <p style="font-size: 20px;">■初回登録時</p>
-            <div style="font-size: 20px;">氏名&emsp;&emsp;：<p id="dialog_username" class="dialog_text"
-                    style="display: inline;"></p>
-            </div>
-            <div style="font-size: 20px;">生年月日：<p id="dialog_birthday" class="dialog_text" style="display: inline;"></p>
-            </div>
-            <p style="font-size: 20px;">■今回の入力</p>
-            <div style="font-size: 20px;">氏名&emsp;&emsp;：<p id="dialog_username_new" class="dialog_text"
-                    style="display: inline;"></p>
-            </div>
-            <div style="font-size: 20px;">生年月日：<p id="dialog_birthday_new" class="dialog_text" style="display: inline;">
-                </p>
-            </div>
-            <div style="text-align: center; margin-top: 30px;">
-                <button type="button" id="dialog_send" onclick="sendResult(true)"
-                    class="btn--blue btn--radius">更新して送信</button>
-                <button id="dialog_close" onclick="click_dialog_close()" class="btn--blue btn--radius"
-                    style="margin-left: 20px;">キャンセル</button>
-            </div>
-        </dialog>
     </form>
+    <dialog style="border: 2px solid black;">
+        <p style="font-size: 20px; text-align: center;">氏名、生年月日が初回時に入力されたものと異なります。<br>ご確認ください。</p>
+        <p style="font-size: 20px; margin: 0px;">■初回登録時</p>
+        <div style="font-size: 20px;">氏名&emsp;&emsp;：<p id="dialog_username" class="dialog_text"
+                style="display: inline;"></p>
+        </div>
+        <div style="font-size: 20px;">生年月日：<p id="dialog_birthday" class="dialog_text" style="display: inline;"></p>
+        </div>
+        <p style="font-size: 20px; margin: 0px;">■今回の入力</p>
+        <div style="font-size: 20px;">氏名&emsp;&emsp;：<p id="dialog_username_new" class="dialog_text"
+                style="display: inline;"></p>
+        </div>
+        <div style="font-size: 20px;">生年月日：<p id="dialog_birthday_new" class="dialog_text" style="display: inline;">
+            </p>
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+            <button type="button" id="dialog_send" onclick="sendResult(true)" class="btn btn-primary">更新して送信</button>
+            <button id="dialog_close" onclick="click_dialog_close()" class="btn btn-secondary"
+                style="margin-left: 20px;">キャンセル</button>
+        </div>
+    </dialog>
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
