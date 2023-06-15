@@ -2,10 +2,49 @@ let line_uid = '';
 let line_uname = '';
 const liffId = "1661289930-Mr5r5NbX";
 // LIFFIDの設定
+/*
 $(document).ready(function () {
     initializeLiff(liffId);
 })
+*/
+window.addEventListener("DOMContentLoaded", () => {
+    // LIFF 初期化
+    liff.init({
+        liffId: liffId
+    })
+        .then(() => {
+            checkLogin();
+            const idtoken = liff.getIDToken();
+            const jsonData = JSON.stringify({
+                id_token: idtoken
+            });
+            // LINEプロフィール取得
+            fetch('/api', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData,
+                creadentials: 'same-origin'
+            })
+                .then(res => {
+                    res.json()
+                        .then(json => {
+                            console.log('json:' + json);
+                            line_uname = json.line_uname;
+                            line_uid = json.line_uid;
+                        })
+                })
+                .catch((err) => {
+                    alert(err);
+                })
+        })
+        .catch((err) => {
+            alert(err);
+        });
+});
 // LIFF初期化
+/*
 function initializeLiff(liffId) {
     liff.init({
         liffId: liffId
@@ -42,7 +81,21 @@ function initializeLiff(liffId) {
             console.log('LIFF Initialization failed ', err);
         });
 }
-
+*/
+// ログインチェック
+function checkLogin() {
+    // ログインチェック
+    if (liff.isLoggedIn()) {
+        //ログイン済
+    } else {
+        // 未ログイン
+        let result = window.confirm("LINE Loginを行います。");
+        if (result) {
+            liff.login();
+        }
+    }
+}
+/*
 function initializeApp() {
     // ログインチェック
     if (liff.isLoggedIn()) {
@@ -55,7 +108,7 @@ function initializeApp() {
         }
     }
 }
-
+*/
 // メッセージ送信
 function sendText(text) {
     liff.sendMessages([

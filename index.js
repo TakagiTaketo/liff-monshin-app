@@ -102,7 +102,7 @@ const selectUserInfo = (req, res) => {
     }
     console.log('selectUserInfoのname:' + name);
     console.log('selectUserInfoのbirthday:' + birthday);
-    console.log('selectUserInfoの:firstConsulFlg:' + firstConsulFlg);
+    console.log('selectUserInfoのfirstConsulFlg:' + firstConsulFlg);
     res.status(200).send({ firstConsulFlg, name, birthday });
   });
 
@@ -118,6 +118,15 @@ const insertUserInfo = (req, res) => {
   created_at = date.getFullYear() + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/'
     + ('0' + date.getDate()).slice(-2) + ' ' + ('0' + date.getHours()).slice(-2) + ':'
     + ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
+  console.log('created_at:' + created_at);
+  console.log('data.line_uid:' + data.line_uid);
+  console.log('data.line_uname:' + data.line_uname);
+  console.log('data.name:' + data.name);
+  console.log('data.birthday:' + data.birthday);
+  console.log('data.height:' + data.height);
+  console.log('data.weight:' + data.weight);
+  console.log('data.waist:' + data.waist);
+  console.log('data.blood_pressure:' + data.blood_pressure);
 
   const insert_query = {
     text: `INSERT INTO users(line_uid, line_uname, name, birthday, height, weight, waist, blood_pressure, created_at, delete_flg) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`,
