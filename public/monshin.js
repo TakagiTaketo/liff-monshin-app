@@ -162,7 +162,7 @@ $(function () {
             name: username,
             birthday: sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0")
         });
-
+        // データベースに存在するかチェックする
         fetch('/selectUser', {
             method: 'POST',
             headers: {
@@ -179,13 +179,14 @@ $(function () {
                             line_uid: line_uid,
                             line_uname: line_uname,
                             name: username,
-                            birthday: birthday,
+                            birthday: sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"),
                             height: height,
                             weight: weight,
                             waist: waist,
                             blood_pressure: bloodPressure
                         });
                         console.log('json.firstConsulFlg:' + json.firstConsulFlg);
+                        // データベースにいない場合、新規追加する。
                         if (json.firstConsulFlg) {
                             fetch('/insertUser', {
                                 method: 'POST',
@@ -207,7 +208,12 @@ $(function () {
                                 .catch((err) => {
                                     alert(err);
                                 })
-                        } else {
+                        } else if (!json.firstConsulFlg && (json.name != username || json.birthday != sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"))) {
+                            // データベースに存在するが、入力された氏名、生年月日が一致しない場合
+                            alert("氏名、生年月日が初回時に入力されたものと異なります。ご確認ください。");
+                            return false;
+                        } else if (!json.firstConsulFlg && json.name == username && json.birthday == sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0")) {
+                            // データベースに存在する場合、更新する。
                             fetch('/updateUser', {
                                 method: 'POST',
                                 headers: {
@@ -229,8 +235,9 @@ $(function () {
                                     alert(err);
                                 })
 
+                        } else {
+                            alert("例外発生。");
                         }
-
                     })
                     .catch((err) => {
                         alert(err);

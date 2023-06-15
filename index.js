@@ -81,23 +81,29 @@ const getUserInfo = (req, res) => {
 // 初診かどうか判定する
 const selectUserInfo = (req, res) => {
   const data = req.body;
-  console.log('selectUserInfo.name' + data.name);
-  console.log('selectUserInfo.birthday' + data.birthday);
+  console.log('selectUserInfo.line_uid' + data.line_uid);
   let firstConsulFlg = false;
+  let birthday = '';
+  let name = '';
   const select_query = {
-    text: `SELECT * FROM users WHERE name='${data.name}' AND birthday='${data.birthday}';`
+    text: `SELECT * FROM users WHERE line_uid='${data.line_uid}' AND delete_flg=0;`
   }
   connection.query(select_query, function (error, results) {
     req.connection.end;
     if (error) throw error;
     if (results.rows[0] != null) {
       firstConsulFlg = false;
+      name = results[0].name;
+      birthday = results[0].birthday;
       console.log('通院者');
     } else if (results.rows[0] == null) {
       firstConsulFlg = true;
       console.log('初診');
     }
-    res.status(200).send({ firstConsulFlg });
+    console.log('selectUserInfoのname:' + name);
+    console.log('selectUserInfoのbirthday:' + birthday);
+    console.log('selectUserInfoの:firstConsulFlg:' + firstConsulFlg);
+    res.status(200).send({ firstConsulFlg, name, birthday });
   });
 
 }
