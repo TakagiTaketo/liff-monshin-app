@@ -205,7 +205,7 @@ $(function () {
                                 })
                         } else if (!json.firstConsulFlg && (json.name != username || json.birthday != sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"))) {
                             // データベースに存在するが、入力された氏名、生年月日が一致しない場合
-                            alert("氏名、生年月日が初回時に入力されたものと異なります。ご確認ください。");
+                            alert("氏名、生年月日が初回時に入力されたものと異なります。ご確認ください。\n初回登録時\n氏名:" + json.name + "\n初回登録時生年月日:" + json.birthday);
                         } else if (!json.firstConsulFlg && json.name == username && json.birthday == sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0")) {
                             // データベースに存在する場合、更新する。
                             fetch('/updateUser', {
