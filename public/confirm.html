@@ -15,11 +15,11 @@
     <form class="w-75 mx-auto" id="form_confirm">
         <p>入力した内容をご確認ください。<br>修正する場合は、下部の戻るボタンより入力画面に戻り修正してください。</p>
         <div>
-            <p class="label_left" name="username" style="display: inline;">Q1-1.名前</p>
+            <p class="label_left" name="username" style="display: inline;">Q1-1.氏名</p>
             <div style="margin: 10px 0px 20px 20px;">
                 <p id="username"></p>
             </div>
-            <p class="label_left" name="birthday" style="display: inline;">Q1-2.生年月日</p>
+            <p class="label_left" name="birthday" style="display: inline;">Q1-2.生年月日(西暦)</p>
             <div style="margin: 10px 0px 20px 20px;">
                 <p id="birthday"></p>
             </div>
@@ -97,10 +97,19 @@
             </div>
         </div>
         <dialog style="border: 2px solid black;">
-            <p style="font-size: 20px; text-align: center;">氏名、生年月日が初回時に入力されたものと異なります。<br>ご確認ください。<br>初回登録時</p>
-            <div style="font-size: 20px;">氏名&emsp;&emsp;：<p id="dialog_username" class="dialog_text"></p>
+            <p style="font-size: 20px; text-align: center;">氏名、生年月日が初回時に入力されたものと異なります。<br>ご確認ください。</p>
+            <p style="font-size: 20px;">■初回登録時</p>
+            <div style="font-size: 20px;">氏名&emsp;&emsp;：<p id="dialog_username" class="dialog_text"
+                    style="display: inline;"></p>
             </div>
-            <div style="font-size: 20px;">生年月日：<p id="dialog_birthday" class="dialog_text"></p>
+            <div style="font-size: 20px;">生年月日：<p id="dialog_birthday" class="dialog_text" style="display: inline;"></p>
+            </div>
+            <p style="font-size: 20px;">■今回の入力</p>
+            <div style="font-size: 20px;">氏名&emsp;&emsp;：<p id="dialog_username_new" class="dialog_text"
+                    style="display: inline;"></p>
+            </div>
+            <div style="font-size: 20px;">生年月日：<p id="dialog_birthday_new" class="dialog_text" style="display: inline;">
+                </p>
             </div>
             <div style="text-align: center; margin-top: 30px;">
                 <button type="button" id="dialog_send" onclick="sendResult(true)"

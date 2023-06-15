@@ -205,8 +205,10 @@ function sendResult(renameFlg) {
                         && !renameFlg
                         && (json.name != username || json.birthday != sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"))) {
                         // データベースに存在するが、入力された氏名、生年月日が一致しない場合
-                        $('#dialog_username').text(username);
-                        $('#dialog_birthday').text(sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"));
+                        $('#dialog_username').text(json.name);
+                        $('#dialog_birthday').text(json.birthday);
+                        $('#dialog_username_new').text(username);
+                        $('#dialog_username_new').text(sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"));
                         dialog.showModal();
                         return false;
                         //alert("氏名、生年月日が初回時に入力されたものと異なります。ご確認ください。\n初回登録時\n氏名:" + json.name + "\n生年月日:" + json.birthday);
@@ -446,9 +448,9 @@ function displayQ9(value) {
     }
 }
 
+
 // ダイアログの閉じるボタン押下時
 function click_dialog_close() {
     dialog.close();
-    return false;
 }
 
