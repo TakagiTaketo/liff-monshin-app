@@ -75,6 +75,28 @@ const selectUserInfo = (req, res) => {
   const select_query = {
     text: `SELECT * FROM users WHERE line_uid='${data.line_uid}' AND delete_flg=0;`
   }
+
+  connection.query(select_query)
+    .then(data => {
+      if (data.rows.length > 0) {
+        console.log('通院者');
+        firstConsulFlg = false;
+        name = data.rows[0].name;
+        birthday = data.rows[0].birthday;
+      } else {
+        console.log('初診');
+        firstConsulFlg = true;
+      }
+      console.log('selectUserInfoのname:' + name);
+      console.log('selectUserInfoのbirthday:' + birthday);
+      console.log('selectUserInfoのfirstConsulFlg:' + firstConsulFlg);
+      res.status(200).send({ firstConsulFlg, name, birthday });
+    })
+    .catch(e => console.log(e))
+    .finally(() => {
+      req.connection.end;
+    });
+  /*
   connection.query(select_query, function (error, results) {
     req.connection.end;
     if (error) throw error;
@@ -90,9 +112,9 @@ const selectUserInfo = (req, res) => {
     console.log('selectUserInfoのname:' + name);
     console.log('selectUserInfoのbirthday:' + birthday);
     console.log('selectUserInfoのfirstConsulFlg:' + firstConsulFlg);
-    res.status(200).send({ "firstConsulFlg": firstConsulFlg, "name": name, "birthday": birthday });
+    res.status(200).send({ firstConsulFlg, name, birthday });
   });
-
+*/
 }
 
 // ユーザー情報を追加する。
