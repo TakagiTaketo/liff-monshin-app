@@ -208,7 +208,7 @@ function sendResult(renameFlg) {
                         $('#dialog_username').text(json.name);
                         $('#dialog_birthday').text(json.birthday);
                         $('#dialog_username_new').text(username);
-                        $('#dialog_username_new').text(sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"));
+                        $('#dialog_birthday_new').text(sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"));
                         dialog.showModal();
                         return false;
                         //alert("氏名、生年月日が初回時に入力されたものと異なります。ご確認ください。\n初回登録時\n氏名:" + json.name + "\n生年月日:" + json.birthday);
