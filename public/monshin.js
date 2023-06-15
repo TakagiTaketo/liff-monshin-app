@@ -43,45 +43,6 @@ window.addEventListener("DOMContentLoaded", () => {
             alert(err);
         });
 });
-// LIFF初期化
-/*
-function initializeLiff(liffId) {
-    liff.init({
-        liffId: liffId
-    })
-        .then(() => {
-            initializeApp();
-            const idtoken = liff.getIDToken();
-            const jsonData = JSON.stringify({
-                id_token: idtoken
-            });
-            fetch('/api', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: jsonData,
-                creadentials: 'same-origin'
-            })
-                .then(res => {
-                    //ここにレスポンス返ってくる
-
-                    res.json()
-                        .then(json => {
-                            console.log('json:' + json);
-                            line_uname = json.line_uname;
-                            line_uid = json.line_uid;
-                        })
-                })
-                .catch((err) => {
-                    alert(err);
-                })
-        })
-        .catch((err) => {
-            console.log('LIFF Initialization failed ', err);
-        });
-}
-*/
 // ログインチェック
 function checkLogin() {
     // ログインチェック
@@ -95,20 +56,6 @@ function checkLogin() {
         }
     }
 }
-/*
-function initializeApp() {
-    // ログインチェック
-    if (liff.isLoggedIn()) {
-        //ログイン済
-    } else {
-        // 未ログイン
-        let result = window.confirm("LINE Loginを行います。");
-        if (result) {
-            liff.login();
-        }
-    }
-}
-*/
 // メッセージ送信
 function sendText(text) {
     liff.sendMessages([
@@ -147,12 +94,6 @@ $(function () {
         const username = sessionStorage.getItem('username');
         // 生年月日
         const birthday = sessionStorage.getItem('birthday_year') + '年' + sessionStorage.getItem('birthday_month') + '月' + sessionStorage.getItem('birthday_day') + '日';
-        /*
-        let birthday_slash = '';
-        if (birthday != '' && birthday != undefined) {
-            birthday_slash = birthday.replace(/-/g, '/');
-        }
-        */
         // 身長
         const height = sessionStorage.getItem('height');
         // 体重
@@ -265,7 +206,6 @@ $(function () {
                         } else if (!json.firstConsulFlg && (json.name != username || json.birthday != sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"))) {
                             // データベースに存在するが、入力された氏名、生年月日が一致しない場合
                             alert("氏名、生年月日が初回時に入力されたものと異なります。ご確認ください。");
-                            return false;
                         } else if (!json.firstConsulFlg && json.name == username && json.birthday == sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0")) {
                             // データベースに存在する場合、更新する。
                             fetch('/updateUser', {
@@ -289,8 +229,6 @@ $(function () {
                                     alert(err);
                                 })
 
-                        } else {
-                            alert("例外発生。");
                         }
                     })
                     .catch((err) => {
@@ -298,7 +236,7 @@ $(function () {
                     });
             })
             .catch((err) => {
-                alert("selectUser失敗" + err);
+                alert(err);
             });
     })
 
