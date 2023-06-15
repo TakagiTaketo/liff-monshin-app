@@ -298,7 +298,7 @@ $(function () {
                     });
             })
             .catch((err) => {
-                alert(err);
+                alert("selectUser失敗" + err);
             });
     })
 
