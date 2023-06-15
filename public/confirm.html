@@ -11,89 +11,92 @@
     <link rel="stylesheet" href="monshin.css">
 
 <body>
-    <H2 style="text-align:center;">問診</H2>
+    <h1 style="text-align:center; font-size: 40px; margin-top: 20px;">問診</h1>
     <form class="w-75 mx-auto" id="form_confirm">
-        <p>入力した内容をご確認ください。<br>修正する場合は、下部の戻るボタンより入力画面に戻り修正してください。</p>
+        <p class="normal_fontsize">入力した内容をご確認ください。<br>修正する場合は、下部の戻るボタンより入力画面に戻り修正してください。</p>
         <div>
-            <p class="label_left" name="username" style="display: inline;">Q1-1.氏名</p>
+            <p class="label_left normal_fontsize" name="username" style="display: inline;">Q1-1.氏名</p>
             <div style="margin: 10px 0px 20px 20px;">
                 <p id="username"></p>
             </div>
-            <p class="label_left" name="birthday" style="display: inline;">Q1-2.生年月日(西暦)</p>
+            <p class="label_left normal_fontsize" name="birthday" style="display: inline;">Q1-2.生年月日(西暦)</p>
             <div style="margin: 10px 0px 20px 20px;">
                 <p id="birthday"></p>
             </div>
-            <p class="label_left" name="height" style="display: inline;">Q1-3.身長</p>
+            <p class="label_left normal_fontsize" name="height" style="display: inline;">Q1-3.身長</p>
             <div style="margin: 10px 0px 20px 20px;">
                 <p id="height"></p>
             </div>
-            <p class="label_left" name="weight" style="display: inline;">Q1-4.体重</p>
+            <p class="label_left normal_fontsize" name="weight" style="display: inline;">Q1-4.体重</p>
             <div style="margin: 10px 0px 20px 20px;">
                 <p id="weight"></p>
                 <p id="weight_check"></p>
             </div>
-            <p class="label_left" name="waist">Q1-5.腹囲</p>
+            <p class="label_left normal_fontsize" name="waist">Q1-5.腹囲</p>
             <div style="margin: 10px 0px 20px 20px;">
                 <p id="waist"></p>
                 <p id="waist_check"></p>
             </div>
-            <p class="label_left" name="bloodPressure">Q1-6.血圧</p>
+            <p class="label_left normal_fontsize" name="bloodPressure">Q1-6.血圧</p>
             <div style="margin: 10px 0px 20px 20px;">
                 <p id="bloodPressure"></p>
                 <p id="bloodPressure_check"></p>
             </div>
-            <p class="label_left" style="display: inline;">Q1-7.取組状況</p>
+            <p class="label_left normal_fontsize" style="display: inline;">Q1-7.取組状況</p>
             <div style="margin: 10px 0px 20px 20px;">
                 <p id="meal"></p>
                 <p id="exercise"></p>
                 <p id="sonota_initiativeText"></p>
             </div>
-            <p class="label_left" style="display: inline;">Q1-8.健診後に医療機関を受信しましたか？</p>
+            <p class="label_left normal_fontsize" style="display: inline;">Q1-8.健診後に医療機関を受信しましたか？</p>
             <div style="margin: 10px 0px 20px 20px;">
                 <p id="kenshin_after"></p>
             </div>
-            <p class="label_left" name="medicine" style="display: inline;">
+            <p class="label_left normal_fontsize" name="medicine" style="display: inline;">
                 Q1-9.血糖値、血圧、中性脂肪、コレステロールについてのお薬を飲み始めましたか？<br>(Q1-8で「はい」を選択した場合、お答えください)</p>
             <div style="margin: 10px 0px 20px 20px;">
                 <p id="medicine"></p>
             </div>
-            <p class="label_left" style="display: inline;">Q2-1.現在、aからcの薬の使用の有無</p>
-            <p class="label_left" style="border-left:none; padding-left: 10px;">a.血圧を下げる薬</p>
+            <p class="label_left normal_fontsize" style="display: inline;">Q2-1.現在、aからcの薬の使用の有無</p>
+            <p class="label_left normal_fontsize" style="border-left:none; padding-left: 10px;">a.血圧を下げる薬</p>
             <div style="margin-left: 20px;">
                 <p id="Q2-1_1"></p>
             </div>
-            <p class="label_left" style="border-left:none; padding-left: 10px;">b.インスリン注射又は血糖を下げる薬</p>
+            <p class="label_left normal_fontsize" style="border-left:none; padding-left: 10px;">b.インスリン注射又は血糖を下げる薬</p>
             <div style="margin-left: 20px;">
                 <p id="Q2-1_2"></p>
             </div>
-            <p class="label_left" style="border-left:none; padding-left: 10px;">c.コレステロールを下げる薬</p>
+            <p class="label_left normal_fontsize" style="border-left:none; padding-left: 10px;">c.コレステロールを下げる薬</p>
             <div style="margin-left: 20px;">
                 <p id="Q2-1_3"></p>
             </div>
-            <p class="label_left" style="display: inline;">Q2-2.医師から、脳卒中(脳出血、脳梗塞等)にかかっているといわれたり、治療を受けたことがありますか？</p>
+            <p class="label_left normal_fontsize" style="display: inline;">
+                Q2-2.医師から、脳卒中(脳出血、脳梗塞等)にかかっているといわれたり、治療を受けたことがありますか？</p>
             <div style="margin-left: 20px;">
                 <p id="Q2-2"></p>
             </div>
-            <p class="label_left" style="display: inline;">Q2-3.医師から、心臓病（狭心症、心筋梗塞等）にかかっているといわれたり、治療を受けたことがありますか。</p>
+            <p class="label_left normal_fontsize" style="display: inline;">
+                Q2-3.医師から、心臓病（狭心症、心筋梗塞等）にかかっているといわれたり、治療を受けたことがありますか。</p>
             <div style="margin-left: 20px;">
                 <p id="Q2-3"></p>
             </div>
-            <p class="label_left" style="display: inline;">Q2-4.医師から、慢性の腎不全にかかっているといわれたり、治療（人工透析）を受けたことがありますか。</p>
+            <p class="label_left normal_fontsize" style="display: inline;">
+                Q2-4.医師から、慢性の腎不全にかかっているといわれたり、治療（人工透析）を受けたことがありますか。</p>
             <div style="margin-left: 20px;">
                 <p id="Q2-4"></p>
             </div>
-            <p class="label_left" style="display: inline;">Q2-5.医師から、貧血といわれたことがある。</p>
+            <p class="label_left normal_fontsize" style="display: inline;">Q2-5.医師から、貧血といわれたことがある。</p>
             <div style="margin-left: 20px;">
                 <p id="Q2-5"></p>
             </div>
-            <p class="label_left">Q2-6.その他質問事項等</p>
+            <p class="label_left normal_fontsize">Q2-6.その他質問事項等</p>
             <div style="margin-left: 20px;">
                 <p id="sonota"></p>
             </div>
-            <div style="text-align: center; font-size: 20px;">
-                <button type="button" class="btn btn-primary" onclick="sendResult(false)"
+            <div style="text-align: center;">
+                <button type="button" class="btn btn-primary normal_fontsize" onclick="sendResult(false)"
                     style="padding: 10px 30px;">送信</button>
-                <button type="button" class="btn btn-secondary" onclick="goPage2()"
+                <button type="button" class="btn btn-secondary normal_fontsize" onclick="goPage2()"
                     style="padding: 10px 30px; margin-left: 20px;">戻る</button>
             </div>
         </div>
