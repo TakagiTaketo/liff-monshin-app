@@ -90,7 +90,7 @@ const selectUserInfo = (req, res) => {
     console.log('selectUserInfoのname:' + name);
     console.log('selectUserInfoのbirthday:' + birthday);
     console.log('selectUserInfoのfirstConsulFlg:' + firstConsulFlg);
-    res.status(200).send({ firstConsulFlg, name, birthday });
+    res.status(200).send({ "firstConsulFlg": firstConsulFlg, "name": name, "birthday": birthday });
   });
 
 }
