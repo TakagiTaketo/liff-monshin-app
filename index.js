@@ -143,15 +143,13 @@ const updateUserInfo = (req, res) => {
     + ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
   console.log('updated_at:' + updated_at);
   console.log('data.line_uid:' + data.line_uid);
-  console.log('data.name:' + data.name);
-  console.log('data.birthday:' + data.birthday);
   console.log('data.height:' + data.height);
   console.log('data.weight:' + data.weight);
   console.log('data.waist:' + data.waist);
   console.log('data.blood_pressure:' + data.blood_pressure);
 
   const update_query = {
-    text: `UPDATE users SET name='${data.name}', birthday='${data.birthday}', height='${data.height}', weight='${data.weight}', waist='${data.waist}', blood_pressure='${data.blood_pressure}', updated_at='${updated_at}' WHERE line_uid='${data.line_uid}' AND delete_flg=0;`
+    text: `UPDATE users SET height='${data.height}', weight='${data.weight}', waist='${data.waist}', blood_pressure='${data.blood_pressure}', updated_at='${updated_at}' WHERE line_uid='${data.line_uid}' AND delete_flg=0;`
   };
   connection.query(update_query)
     .then(() => {

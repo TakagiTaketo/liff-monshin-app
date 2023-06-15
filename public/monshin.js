@@ -86,7 +86,7 @@ $(function () {
     });
 });
 // 送信ボタン押下時処理
-function sendResult(renameFlg) {
+function sendResult() {
     // Page1
     // 氏名
     const username = sessionStorage.getItem('username');
@@ -202,7 +202,6 @@ function sendResult(renameFlg) {
                                 alert(err);
                             })
                     } else if (!json.firstConsulFlg
-                        && !renameFlg
                         && (json.name != username || json.birthday != sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"))) {
                         // データベースに存在するが、入力された氏名、生年月日が一致しない場合
                         $('#dialog_username').text(json.name);
@@ -211,9 +210,10 @@ function sendResult(renameFlg) {
                         $('#dialog_birthday_new').text(sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"));
                         dialog.showModal();
                         return false;
-                        //alert("氏名、生年月日が初回時に入力されたものと異なります。ご確認ください。\n初回登録時\n氏名:" + json.name + "\n生年月日:" + json.birthday);
+                        //alert("氏名、生年月日が初回時に入力されたものと異なります。\nご確認ください。\n初回登録時\n氏名:" + json.name + "\n生年月日:" + json.birthday + "\n今回の入力\n氏名:" + username + "\n生年月日:" + sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0")
+                        //    + "変更する場合は");
+
                     } else if (!json.firstConsulFlg
-                        && renameFlg
                         && (json.name != username || json.birthday != sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"))) {
                         // 新しい氏名・生年月日で更新する場合
                         // データベースに存在する場合、更新する。

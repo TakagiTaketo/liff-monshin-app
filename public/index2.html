@@ -19,21 +19,21 @@
             <p class="label_left normal_fontsize" style="display: inline;">Q2-1.現在、aからcの薬の使用の有無</p>
             <p style="color: red; display: inline;">*</p>
             <p class="label_left normal_fontsize" style="border-left:none; padding-left: 10px;">a.血圧を下げる薬</p>
-            <div style="margin-left: 20px;">
+            <div class="normal_fontsize" style="margin-left: 20px;">
                 <input type="radio" id="Q2-1_1Yes" name="Q2-1_1" value="はい" required>
                 <label for="Q2-1_1Yes">はい</label>
                 <input type="radio" id="Q2-1_1No" name="Q2-1_1" value="いいえ" required>
                 <label for="Q2-1_1No">いいえ</label>
             </div>
             <p class="label_left normal_fontsize" style="border-left:none; padding-left: 10px;">b.インスリン注射又は血糖を下げる薬</p>
-            <div style="margin-left: 20px;">
+            <div class="normal_fontsize" style="margin-left: 20px;">
                 <input type="radio" id="Q2-1_2Yes" name="Q2-1_2" value="はい" required>
                 <label for="Q2-1_2Yes">はい</label>
                 <input type="radio" id="Q2-1_2No" name="Q2-1_2" value="いいえ" required>
                 <label for="Q2-1_2No">いいえ</label>
             </div>
             <p class="label_left normal_fontsize" style="border-left:none; padding-left: 10px;">c.コレステロールを下げる薬</p>
-            <div style="margin-left: 20px;">
+            <div class="normal_fontsize" style="margin-left: 20px;">
                 <input type="radio" id="Q2-1_3Yes" name="Q2-1_3" value="はい" required>
                 <label for="Q2-1_3Yes">はい</label>
                 <input type="radio" id="Q2-1_3No" name="Q2-1_3" value="いいえ" required>
@@ -42,7 +42,7 @@
             <p class="label_left normal_fontsize" style="display: inline;">
                 Q2-2.医師から、脳卒中(脳出血、脳梗塞等)にかかっているといわれたり、治療を受けたことがありますか？</p>
             <p style="color: red; display: inline;">*</p>
-            <div style="margin-left: 20px;">
+            <div class="normal_fontsize" style="margin-left: 20px;">
                 <input type="radio" id="Q2-2Yes" name="Q2-2" value="はい" required>
                 <label for="Q2-2Yes">はい</label>
                 <input type="radio" id="Q2-2No" name="Q2-2" value="いいえ" required>
@@ -51,7 +51,7 @@
             <p class="label_left normal_fontsize" style="display: inline;">
                 Q2-3.医師から、心臓病（狭心症、心筋梗塞等）にかかっているといわれたり、治療を受けたことがありますか。</p>
             <p style="color: red; display: inline;">*</p>
-            <div style="margin-left: 20px;">
+            <div class="normal_fontsize" style="margin-left: 20px;">
                 <input type="radio" id="Q2-3Yes" name="Q2-3" value="はい" required>
                 <label for="Q2-3Yes">はい</label>
                 <input type="radio" id="Q2-3No" name="Q2-3" value="いいえ" required>
@@ -60,7 +60,7 @@
             <p class="label_left normal_fontsize" style="display: inline;">
                 Q2-4.医師から、慢性の腎不全にかかっているといわれたり、治療（人工透析）を受けたことがありますか。</p>
             <p style="color: red; display: inline;">*</p>
-            <div style="margin-left: 20px;">
+            <div class="normal_fontsize" style="margin-left: 20px;">
                 <input type="radio" id="Q2-4Yes" name="Q2-4" value="はい" required>
                 <label for="Q2-4Yes">はい</label>
                 <input type="radio" id="Q2-4No" name="Q2-4" value="いいえ" required>
@@ -68,7 +68,7 @@
             </div>
             <p class="label_left normal_fontsize" style="display: inline;">Q2-5.医師から、貧血といわれたことがある。</p>
             <p style="color: red; display: inline;">*</p>
-            <div style="margin-left: 20px;">
+            <div class="normal_fontsize" style="margin-left: 20px;">
                 <input type="radio" id="Q2-5Yes" name="Q2-5" value="はい" required>
                 <label for="Q2-5Yes">はい</label>
                 <input type="radio" id="Q2-5No" name="Q2-5" value="いいえ" required>
@@ -76,12 +76,11 @@
             </div>
             <p class="label_left normal_fontsize">Q2-6.その他質問事項等</p>
             <div style="margin-left: 20px;">
-                <textarea id="sonota" name="sonota" placeholder=""></textarea>
+                <textarea class="form-control" id="sonota" name="sonota" placeholder=""></textarea>
             </div>
             <div style="text-align: center; margin-top: 20px;">
-                <input type="submit" class="btn btn-primary normal_fontsize" value="確認"
-                    style="padding: 6px 20px; display: block;">
-                <button type="button" class="btn btn-secondary normal_fontsize"
+                <input type="submit" class="btn btn-primary normal_fontsize" value="確認" style="padding: 6px 20px;">
+                <button type="button" class="btn btn-secondary normal_fontsize" style="margin-left: 20px;"
                     onclick="clickPage1Button()">前の質問へ戻る</button>
             </div>
             <div style="text-align:center; margin-top: 30px;">

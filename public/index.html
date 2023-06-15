@@ -24,18 +24,19 @@
             <p class="label_left normal_fontsize" name="birthday" style="display: inline;">Q1-2.生年月日(西暦)</p>
             <p style="color: red; display: inline;">*</p>
             <div style="margin: 10px 0px 20px 20px;">
-                <input type="text" id="birthday_year" name="page01" style="width: 70px; height: 38px;"
-                    pattern="^[0-9]+$" required>年
-                <input type="text" id="birthday_month" name="page01" style="width: 70px; height: 38px;"
-                    pattern="^[0-9]+$" required>月
-                <input type="text" id="birthday_day" name="page01" style="width: 70px; height: 38px;" pattern="^[0-9]+$"
-                    required>日
+                <input type="text" class="form-control" id="birthday_year" name="page01"
+                    style="width: 65px; height: 38px; display: inline;" pattern="^[0-9]+$" required>年
+                <input type="text" class="form-control" id="birthday_month" name="page01"
+                    style="width: 65px; height: 38px; display: inline;" pattern="^[0-9]+$" required>月
+                <input type="text" class="form-control" id="birthday_day" name="page01"
+                    style="width: 65px; height: 38px; display: inline;" pattern="^[0-9]+$" required>日
             </div>
             <p class="label_left normal_fontsize" name="height" style="display: inline;">Q1-3.身長</p>
             <p style="color: red; display: inline;">*</p>
             <div style="margin: 10px 0px 20px 20px;">
                 <input class="form-control w-100 mt-1 normal_fontsize" id="height" name="page01"
-                    style="width:75px!important; display: inline;" pattern="^[0-9]+$" required>cm
+                    style="width:75px!important; display: inline;" pattern="^[0-9]+$" required><span
+                    style="margin-top: 15px;">cm&nbsp;</span>
             </div>
             <p class="label_left normal_fontsize" name="weight" style="display: inline;">Q1-4.体重</p>
             <p style="color: red; display: inline;">*</p>
@@ -44,26 +45,32 @@
                     style="width:75px!important; display: inline; height: 38px;" pattern="^[0-9]+$" required><span
                     style="margin-top: 15px;">kg&nbsp;</span>
                 <input type="checkbox" id="weight_check"
-                    style="width: 20px; height: 20px; margin-top: 10px; display: inline-block;">
-                <label for="weight_check" class="normal_fontsize">変化なし</label>
+                    style="width: 20px; height: 20px; margin-top: 10px; margin-left: 20px; display: inline-block;">
+                <label for="weight_check" class="normal_fontsize"
+                    style="margin-left: 10px; margin-top: 4px;">変化なし</label>
             </div>
             <p class="label_left normal_fontsize" name="waist">Q1-5.腹囲</p>
-            <div style="margin: 10px 0px 20px 20px;">
+            <div style="margin: 10px 0px 20px 20px; display: flex;">
                 <input class="form-control w-100 mt-1" id="waist" name="page01"
-                    style="width:75px!important; display: inline;" pattern="^[0-9]+$" required>cm&nbsp;
-                <input type="checkbox" id="waist_check">
-                <label for="waist_check" class="normal_fontsize">変化なし</label>
+                    style="width:75px!important; display: inline;" pattern="^[0-9]+$" required><span
+                    style="margin-top: 15px;">cm&nbsp;</span>
+                <input type="checkbox" id="waist_check"
+                    style="width: 20px; height: 20px; margin-top: 10px; margin-left: 20px; display: inline-block;">
+                <label for="waist_check" class="normal_fontsize"
+                    style="margin-left: 10px; margin-top: 4px;">変化なし</label>
             </div>
             <p class="label_left normal_fontsize" name="bloodPressure">Q1-6.血圧</p>
-            <div style="margin: 10px 0px 20px 20px;">
+            <div style="margin: 10px 0px 20px 20px; display: flex;">
                 <input class="form-control w-100 mt-1" id="bloodPressure" name="page01"
-                    style="width:75px!important; display: inline;" pattern="^[0-9]+$" required>mmHg&nbsp;
-                <input type="checkbox" id="bloodPressure_check">
-                <label for="bloodPressure_check">変化なし</label>
+                    style="width:75px!important; display: inline;" pattern="^[0-9]+$" required><span
+                    style="margin-top: 15px;">mmHg&nbsp;</span>
+                <input type="checkbox" id="bloodPressure_check"
+                    style="width: 20px; height: 20px; margin-top: 10px; margin-left: 20px; display: inline-block;">
+                <label for="bloodPressure_check" class="normal_fontsize"
+                    style="margin-left: 10px; margin-top: 4px;">変化なし</label>
             </div>
             <p class="label_left normal_fontsize" style="display: inline;">Q1-7.取組状況</p>
-            <!--<p style="color: red; display: inline;">*</p>-->
-            <div style="margin: 10px 0px 20px 20px;">
+            <div style="margin: 10px 0px 20px 20px;" class="normal_fontsize">
                 <input type="checkbox" name="initiative" id="meal" value="食事">
                 <label for="meal">食事</label><br>
                 <input type="checkbox" name="initiative" id="exercise" value="運動">
@@ -75,7 +82,7 @@
             </div>
             <p class="label_left normal_fontsize" style="display: inline;">Q1-8.健診後に医療機関を受信しましたか？</p>
             <p style="color: red; display: inline;">*</p>
-            <div style="margin: 10px 0px 20px 20px;">
+            <div class="normal_fontsize" style="margin: 10px 0px 20px 20px;">
                 <input type="radio" name="kenshin_after" id="kenshin_after_yes" value="はい"
                     onchange="displayQ9(this.value)">
                 <label for="kenshin_after_yes">はい</label><br>
@@ -86,7 +93,7 @@
             <p class="label_left normal_fontsize" name="medicine" style="display: inline;">
                 Q1-9.血糖値、血圧、中性脂肪、コレステロールについてのお薬を飲み始めましたか？<br>(Q1-8で「はい」を選択した場合、お答えください)</p>
             <p style="color: red; display: inline;">*</p>
-            <div style="margin: 10px 0px 20px 20px;">
+            <div class="normal_fontsize" style="margin: 10px 0px 20px 20px;">
                 <input type="radio" name="medicine" id="medicine_yes" value="はい" disabled>
                 <label for="medicine_yes">はい</label><br>
                 <input type="radio" name="medicine" id="medicine_no" value="いいえ" disabled>
