@@ -187,7 +187,10 @@ function sendResult() {
 
     // Q2-9.血糖値、血圧、中性脂肪、コレステロールについてのお薬を飲み始めましたか？
     const q1_9Text = 'Q.血糖値、血圧、中性脂肪、コレステロールについてのお薬を飲み始めましたか？';
-    const medicine = sessionStorage.getItem('medicine');
+    let medicine = sessionStorage.getItem('medicine');
+    if (kenshin_after == 'いいえ') {
+        medicine = 'いいえ';
+    }
 
     // Page2
     const q2_1Text = 'Q.現在、aからcの薬の使用の有無';
