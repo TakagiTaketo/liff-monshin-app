@@ -190,6 +190,7 @@ const selectMonshin = (req, res) => {
         latest_bloodPressure_max = data.rows[0].blood_pressure_max;
         latest_bloodPressure_min = data.rows[0].blood_pressure_min;
       }
+      console.log('monshin_umu:' + monshin_umu);
       console.log('latest_weight:' + latest_weight);
       console.log('latest_waist:' + latest_waist);
       console.log('latest_bloodPressure_max' + latest_bloodPressure_max);

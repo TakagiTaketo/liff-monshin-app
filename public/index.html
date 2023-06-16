@@ -44,11 +44,11 @@
                 <input class="form-control w-100 mt-1 normal_fontsize" id="weight" name="page01"
                     style="width:75px!important; display: inline; height: 38px;" pattern="^[0-9]+$" required><span
                     style="margin-top: 15px;">kg&nbsp;</span>
-                <div name="changing_check" hidden>
-                    <p>前回の入力値</p>
-                    <p id="latest_weight"></p><span>kg</span>
+                <div name="changing_check" style="display: none;">
+                    <p style="margin-top: 12px; display: inline-block;">前回の入力値：</p>
+                    <p id="latest_weight" style="display: inline;"></p><span style="display: inline;">kg</span>
                     <input type="checkbox" id="weight_check"
-                        style="width: 20px; height: 20px; margin-top: 10px; margin-left: 20px; display: inline-block;">
+                        style="width: 20px; height: 20px; margin-top: 10px; display: inline-block;">
                     <label for="weight_check" class="normal_fontsize"
                         style="margin-left: 10px; margin-top: 4px;">変化なし</label>
                 </div>
@@ -58,11 +58,11 @@
                 <input class="form-control w-100 mt-1 normal_fontsize" id="waist" name="page01"
                     style="width:75px!important; display: inline;" pattern="^[0-9]+$" required><span
                     style="margin-top: 15px;">cm&nbsp;</span>
-                <div name="changing_check" hidden>
-                    <p>前回の入力値</p>
-                    <p id="latest_waist"></p><span>cm</span>
+                <div name="changing_check" style="display: none;">
+                    <p style="margin-top: 12px; display: inline-block;">前回の入力値：</p>
+                    <p id="latest_waist" style="display: inline;"></p><span style="display: inline;">cm</span>
                     <input type="checkbox" id="waist_check"
-                        style="width: 20px; height: 20px; margin-top: 10px; margin-left: 20px; display: inline-block;">
+                        style="width: 20px; height: 20px; margin-top: 10px; display: inline-block;">
                     <label for="waist_check" class="normal_fontsize"
                         style="margin-left: 10px; margin-top: 4px;">変化なし</label>
                 </div>
@@ -77,10 +77,12 @@
                 <input class="form-control w-100 mt-1 normal_fontsize" id="bloodPressure_min" name="page01"
                     style="width:75px!important; display: inline;" pattern="^[0-9]+$" required><span
                     style="margin-top: 15px;">mmHg&nbsp;</span><br>
-                <div name="changing_check" hidden>
-                    <p>前回の入力値</p>
-                    <p id="latest_bloodPressure_max"></p><span>mmHg</span>
-                    <p id="latest_bloodPressure_min"></p><span>mmHg</span>
+                <div name="changing_check" style="display: none;">
+                    <p style="margin-top: 12px; display: inline-block;">前回の入力値：</p>
+                    <p id="latest_bloodPressure_max" style="display: inline;"></p><span
+                        style="display: inline;">mmHg</span>
+                    <p id="latest_bloodPressure_min" style="display: inline;"></p><span
+                        style="display: inline;">mmHg</span><br>
                     <input type="checkbox" id="bloodPressure_check"
                         style="width: 20px; height: 20px; margin-top: 10px; display: inline-block;">
                     <label for="bloodPressure_check" class="normal_fontsize"

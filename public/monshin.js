@@ -77,7 +77,7 @@ window.addEventListener("DOMContentLoaded", () => {
                                                 }
 
                                                 for (let i = 0; i < changing_checks.length; i++) {
-                                                    changing_checks[i].style.visibility = "visible";
+                                                    changing_checks[i].style.display = "block";
                                                 }
                                                 document.getElementById('latest_weight').innerText = latest_weight;
                                                 document.getElementById('latest_waist').innerText = latest_waist;
@@ -85,7 +85,7 @@ window.addEventListener("DOMContentLoaded", () => {
                                                 document.getElementById('latest_bloodPressure_min').innerText = latest_bloodPressure_min;
                                             } else {
                                                 for (let i = 0; i < changing_checks.length; i++) {
-                                                    changing_checks[i].style.visibility = "hidden";
+                                                    changing_checks[i].style.display = "none";
                                                 }
                                             }
                                         })
