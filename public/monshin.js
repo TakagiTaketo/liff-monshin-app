@@ -207,8 +207,8 @@ function sendResult() {
     const q2_5 = sessionStorage.getItem('Q2-5');
     const sonota = sessionStorage.getItem('sonota');
     // メッセージ作成
-    const msg = `問診記入\n氏名：${username}\n生年月日：${birthday}\n身長：${height}cm\n体重：${weight}kg${weight_check}\n腹囲：${waist}cm${waist_check}\n最高血圧(収縮期血圧)：${bloodPressure_max}mmHg${bloodPressure_check}\n最低血圧(拡張期血圧)：${bloodPressure_min}mmHg${bloodPressure_check}\n取組状況：${meal}\n${exercise}\n${sonota_initiativeText}\n\n${q1_8Text}\n${kenshin_after}\n\n${q1_9Text}\n${medicine}\n\n${q2_1Text}\n${q2_1_1Text}\n${q2_1_1}\n\n${q2_1_2Text}\n${q2_1_2}\n\n${q2_1_3Text}\n${q2_1_3}\n\n${q2_2Text}\n${q2_2}\n\n${q2_3Text}\n${q2_3}\n\n${q2_4Text}\n${q2_4}\n\n${q2_5Text}\n${q2_5}\n\nQ.その他質問事項等：${sonota}`;
-    const medicine_msg = `問診記入\nお薬服用中\n氏名：${username}\n生年月日：${birthday}\n身長：${height}cm\n体重：${weight}kg${weight_check}\n腹囲：${waist}cm${waist_check}\n最高血圧(収縮期血圧)：${bloodPressure_max}mmHg${bloodPressure_check}\n最低血圧(拡張期血圧)：${bloodPressure_min}mmHg${bloodPressure_check}\n取組状況：${meal}\n${exercise}\n${sonota_initiativeText}\n\n${q1_8Text}\n${kenshin_after}\n\n${q1_9Text}\n${medicine}\n\n${q2_1Text}\n${q2_1_1Text}\n${q2_1_1}\n\n${q2_1_2Text}\n${q2_1_2}\n\n${q2_1_3Text}\n${q2_1_3}\n\n${q2_2Text}\n${q2_2}\n\n${q2_3Text}\n${q2_3}\n\n${q2_4Text}\n${q2_4}\n\n${q2_5Text}\n${q2_5}\n\nQ.その他質問事項等：${sonota}`;
+    const msg = `問診記入\n氏名：${username}\n生年月日：${birthday}\n身長：${height}cm\n体重：${weight}kg${weight_check}\n腹囲：${waist}cm${waist_check}\n最高血圧(収縮期血圧)：${bloodPressure_max}mmHg\n最低血圧(拡張期血圧)：${bloodPressure_min}mmHg${bloodPressure_check}\n取組状況：${meal}\n${exercise}\n${sonota_initiativeText}\n\n${q1_8Text}\n${kenshin_after}\n\n${q1_9Text}\n${medicine}\n\n${q2_1Text}\n${q2_1_1Text}\n${q2_1_1}\n\n${q2_1_2Text}\n${q2_1_2}\n\n${q2_1_3Text}\n${q2_1_3}\n\n${q2_2Text}\n${q2_2}\n\n${q2_3Text}\n${q2_3}\n\n${q2_4Text}\n${q2_4}\n\n${q2_5Text}\n${q2_5}\n\nQ.その他質問事項等：${sonota}`;
+    const medicine_msg = `問診記入\nお薬服用中\n氏名：${username}\n生年月日：${birthday}\n身長：${height}cm\n体重：${weight}kg${weight_check}\n腹囲：${waist}cm${waist_check}\n最高血圧(収縮期血圧)：${bloodPressure_max}mmHg\n最低血圧(拡張期血圧)：${bloodPressure_min}mmHg${bloodPressure_check}\n取組状況：${meal}\n${exercise}\n${sonota_initiativeText}\n\n${q1_8Text}\n${kenshin_after}\n\n${q1_9Text}\n${medicine}\n\n${q2_1Text}\n${q2_1_1Text}\n${q2_1_1}\n\n${q2_1_2Text}\n${q2_1_2}\n\n${q2_1_3Text}\n${q2_1_3}\n\n${q2_2Text}\n${q2_2}\n\n${q2_3Text}\n${q2_3}\n\n${q2_4Text}\n${q2_4}\n\n${q2_5Text}\n${q2_5}\n\nQ.その他質問事項等：${sonota}`;
 
     const jsonData_selectuser = JSON.stringify({
         line_uid: line_uid,
@@ -236,7 +236,8 @@ function sendResult() {
                         height: height,
                         weight: weight,
                         waist: waist,
-                        blood_pressure: bloodPressure_max + '/' + bloodPressure_min
+                        blood_pressure_max: bloodPressure_max,
+                        blood_pressure_min: bloodPressure_min
                     });
                     console.log('json.firstConsulFlg:' + json.firstConsulFlg);
                     // データベースにいない場合、新規追加する。
@@ -371,8 +372,10 @@ function setPage1Session() {
     } else {
         sessionStorage.setItem('waist_check', '');
     }
-    // 血圧
-    sessionStorage.setItem('bloodPressure', $('#bloodPressure').val());
+    // 最高血圧
+    sessionStorage.setItem('bloodPressure_max', $('#bloodPressure_max').val());
+    // 最低血圧
+    sessionStorage.setItem('bloodPressure_min', $('#bloodPressure_min').val());
     // 血圧（変化有無）
     if ($('#bloodPressure_check').prop('checked')) {
         sessionStorage.setItem('bloodPressure_check', '※変化なし');

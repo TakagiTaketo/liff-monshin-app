@@ -111,11 +111,11 @@ const insertUserInfo = (req, res) => {
   console.log('data.height:' + data.height);
   console.log('data.weight:' + data.weight);
   console.log('data.waist:' + data.waist);
-  console.log('data.blood_pressure:' + data.blood_pressure);
-
+  console.log('data.blood_pressure_max:' + data.blood_pressure_max);
+  console.log('data.blood_pressure_min:' + data.blood_pressure_min);
   const insert_query = {
-    text: `INSERT INTO users(line_uid, line_uname, name, birthday, height, weight, waist, blood_pressure, created_at, delete_flg) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`,
-    values: [data.line_uid, data.line_uname, data.name, data.birthday, data.height, data.weight, data.waist, data.blood_pressure, created_at, 0]
+    text: `INSERT INTO users(line_uid, line_uname, name, birthday, height, weight, waist, blood_pressure_max, blood_pressure_min, created_at, delete_flg) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`,
+    values: [data.line_uid, data.line_uname, data.name, data.birthday, data.height, data.weight, data.waist, data.blood_pressure_max, data.blood_pressure_min, created_at, 0]
   };
 
   connection.query(insert_query)
@@ -147,10 +147,11 @@ const updateUserInfo = (req, res) => {
   console.log('data.height:' + data.height);
   console.log('data.weight:' + data.weight);
   console.log('data.waist:' + data.waist);
-  console.log('data.blood_pressure:' + data.blood_pressure);
+  console.log('data.blood_pressure_max:' + data.blood_pressure_max);
+  console.log('data.blood_pressure_min:' + data.blood_pressure_min);
 
   const update_query = {
-    text: `UPDATE users SET height='${data.height}', weight='${data.weight}', waist='${data.waist}', blood_pressure='${data.blood_pressure}', updated_at='${updated_at}' WHERE line_uid='${data.line_uid}' AND delete_flg=0;`
+    text: `UPDATE users SET height='${data.height}', weight='${data.weight}', waist='${data.waist}', blood_pressure_max='${data.blood_pressure_max}', blood_pressure_min='${data.blood_pressure_min}', updated_at='${updated_at}' WHERE line_uid='${data.line_uid}' AND delete_flg=0;`
   };
   connection.query(update_query)
     .then(() => {
@@ -175,7 +176,7 @@ const selectMonshin = (req, res) => {
   let latest_bloodPressure_max = '';
   let latest_bloodPressure_min = '';
   const select_query = {
-    text: `SELECT weight, waist, blood_pressure FROM users WHERE line_uid='${data.line_uid}' AND delete_flg=0`
+    text: `SELECT weight, waist, blood_pressure_max, blood_pressure_min FROM users WHERE line_uid='${data.line_uid}' AND delete_flg=0`
   };
   connection.query(select_query)
     .then((data) => {
@@ -183,8 +184,8 @@ const selectMonshin = (req, res) => {
         monshin_umu = true;
         latest_weight = data.rows[0].weight;
         latest_waist = data.rows[0].waist;
-        latest_bloodPressure_max = data.rows[0].blood_pressure.substring(0, data.rows[0].blood_pressure.indexOf('/'));
-        latest_bloodPressure_min = data.rows[0].blood_pressure.substring(data.rows[0].blood_pressure.indexOf('/') + 1);
+        latest_bloodPressure_max = data.rows[0].blood_pressure_max;
+        latest_bloodPressure_min = data.rows[0].blood_pressure_min;
       }
       res.status(200).send({ monshin_umu, latest_weight, latest_waist, latest_bloodPressure_max, latest_bloodPressure_min });
     })
