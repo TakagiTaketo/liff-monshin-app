@@ -43,7 +43,7 @@
             <div style="margin: 10px 0px 20px 20px; display: flex;">
                 <input class="form-control w-100 mt-1 normal_fontsize" id="weight" name="page01"
                     style="width:75px!important; display: inline; height: 38px;" pattern="^[0-9]+$" required><span
-                    style="margin-top: 15px;">kg&nbsp;</span>
+                    style="margin-top: 15px;">kg&nbsp;</span><br>
                 <div name="changing_check" style="display: none;">
                     <p style="margin-top: 12px; display: inline-block;">前回の入力値：</p>
                     <p id="latest_weight" style="display: inline;"></p><span style="display: inline;">kg</span><br>
@@ -57,7 +57,7 @@
             <div style="margin: 10px 0px 20px 20px; display: flex;">
                 <input class="form-control w-100 mt-1 normal_fontsize" id="waist" name="page01"
                     style="width:75px!important; display: inline;" pattern="^[0-9]+$" required><span
-                    style="margin-top: 15px;">cm&nbsp;</span>
+                    style="margin-top: 15px;">cm&nbsp;</span><br>
                 <div name="changing_check" style="display: none;">
                     <p style="margin-top: 12px; display: inline-block;">前回の入力値：</p>
                     <p id="latest_waist" style="display: inline;"></p><span style="display: inline;">cm</span><br>
@@ -78,10 +78,10 @@
                     style="width:75px!important; display: inline;" pattern="^[0-9]+$" required><span
                     style="margin-top: 15px;">mmHg&nbsp;</span><br>
                 <div name="changing_check" style="display: none;">
-                    <p style="margin-top: 12px; display: inline-block;">前回の入力値：</p>
-                    <p id="latest_bloodPressure_max" style="display: inline;"></p><span
-                        style="display: inline;">mmHg</span>
-                    <p id="latest_bloodPressure_min" style="display: inline;"></p><span
+                    <p style="margin-top: 12px; display: inline-block;">前回の入力値</p>
+                    最高血圧:<p id="latest_bloodPressure_max" style="display: inline;"></p><span
+                        style="display: inline;">mmHg</span><br>
+                    最低血圧:<p id="latest_bloodPressure_min" style="display: inline;"></p><span
                         style="display: inline;">mmHg</span><br>
                     <input type="checkbox" id="bloodPressure_check"
                         style="width: 20px; height: 20px; margin-top: 10px; display: inline-block;">
