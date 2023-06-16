@@ -1,5 +1,9 @@
 let line_uid = '';
 let line_uname = '';
+let latest_weight = '';
+let latest_waist = '';
+let latest_bloodPressure_max = '';
+let latest_bloodPressure_min = '';
 const liffId = "1660856020-9r4xpNbr";//
 let dialog = document.querySelector('dialog');
 let dialog_send = $('#dialog_send');
@@ -32,6 +36,60 @@ window.addEventListener("DOMContentLoaded", () => {
                             console.log('json:' + json);
                             line_uname = json.line_uname;
                             line_uid = json.line_uid;
+
+                            // 最後の問診データを取得する
+                            const jsonData = JSON.stringify({
+                                line_uid: line_uid
+                            });
+                            fetch('/selectMonshin', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: jsonData,
+                                creadentials: 'same-origin'
+                            })
+                                .then(res => {
+                                    res.json()
+                                        .then(json => {
+                                            let monshin_umu = json.monshin_umu;
+                                            latest_weight = json.latest_weight;
+                                            latest_waist = json.latest_waist;
+                                            latest_bloodPressure_max = json.latest_bloodPressure_max;
+                                            latest_bloodPressure_min = json.latest_bloodPressure_min;
+                                            console.log('latest_weight:' + monshin_umu);
+                                            console.log('latest_weight:' + latest_weight);
+                                            console.log('latest_waist:' + latest_waist);
+                                            console.log('latest_bloodPressure_max:' + latest_bloodPressure_max);
+                                            console.log('latest_bloodPressure_min:' + latest_bloodPressure_min);
+
+                                            let changing_checks = document.getElementsByName('changing_check');
+                                            if (monshin_umu) {
+                                                // 入力がなかった時、入力なしとする
+                                                if (latest_weight == '') {
+                                                    latest_weight = '入力なし';
+                                                } else if (latest_waist == '') {
+                                                    latest_waist = '入力なし';
+                                                } else if (latest_bloodPressure_max == '') {
+                                                    latest_bloodPressure_max = '入力なし';
+                                                } else if (latest_bloodPressure_min == '') {
+                                                    latest_bloodPressure_min = '入力なし';
+                                                }
+
+                                                for (let i = 0; i < changing_checks.length; i++) {
+                                                    changing_checks[i].style.visibility = "visible";
+                                                }
+                                                document.getElementById('latest_weight').innerText = latest_weight;
+                                                document.getElementById('latest_waist').innerText = latest_waist;
+                                                document.getElementById('latest_bloodPressure_max').innerText = latest_bloodPressure_max;
+                                                document.getElementById('latest_bloodPressure_min').innerText = latest_bloodPressure_min;
+                                            } else {
+                                                for (let i = 0; i < changing_checks.length; i++) {
+                                                    changing_checks[i].style.visibility = "hidden";
+                                                }
+                                            }
+                                        })
+                                })
                         })
                 })
                 .catch((err) => {
@@ -102,8 +160,10 @@ function sendResult() {
     const waist = sessionStorage.getItem('waist');
     // 腹囲（変化有無）
     const waist_check = sessionStorage.getItem('waist_check');
-    // 血圧
-    const bloodPressure = sessionStorage.getItem('bloodPressure');
+    // 血圧(最高)
+    const bloodPressure_max = sessionStorage.getItem('bloodPressure_max');
+    // 血圧(最低)
+    const bloodPressure_min = sessionStorage.getItem('bloodPressure_min');
     // 血圧（変化有無）
     const bloodPressure_check = sessionStorage.getItem('bloodPressure_check');
 
@@ -121,8 +181,8 @@ function sendResult() {
     // その他自由記入欄
     const sonota_initiativeText = sessionStorage.getItem('sonota_initiativeText')
 
-    // Q1-8.健診後に医療機関を受信しましたか？
-    const q1_8Text = 'Q.健診後に医療機関を受信しましたか？';
+    // Q1-8.健診後に医療機関を受診しましたか？
+    const q1_8Text = 'Q.健診後に医療機関を受診しましたか？';
     const kenshin_after = sessionStorage.getItem('kenshin_after');
 
     // Q2-9.血糖値、血圧、中性脂肪、コレステロールについてのお薬を飲み始めましたか？
@@ -147,8 +207,8 @@ function sendResult() {
     const q2_5 = sessionStorage.getItem('Q2-5');
     const sonota = sessionStorage.getItem('sonota');
     // メッセージ作成
-    const msg = `問診記入\n氏名：${username}\n生年月日：${birthday}\n身長：${height}cm\n体重：${weight}kg${weight_check}\n腹囲：${waist}cm${waist_check}\n血圧：${bloodPressure}mmHg${bloodPressure_check}\n取組状況：${meal}\n${exercise}\n${sonota_initiativeText}\n\n${q1_8Text}\n${kenshin_after}\n\n${q1_9Text}\n${medicine}\n\n${q2_1Text}\n${q2_1_1Text}\n${q2_1_1}\n\n${q2_1_2Text}\n${q2_1_2}\n\n${q2_1_3Text}\n${q2_1_3}\n\n${q2_2Text}\n${q2_2}\n\n${q2_3Text}\n${q2_3}\n\n${q2_4Text}\n${q2_4}\n\n${q2_5Text}\n${q2_5}\n\nQ.その他質問事項等：${sonota}`;
-    const medicine_msg = `問診記入\nお薬服用中\n氏名：${username}\n生年月日：${birthday}\n身長：${height}cm\n体重：${weight}kg${weight_check}\n腹囲：${waist}cm${waist_check}\n血圧：${bloodPressure}mmHg${bloodPressure_check}\n取組状況：${meal}\n${exercise}\n${sonota_initiativeText}\n\n${q1_8Text}\n${kenshin_after}\n\n${q1_9Text}\n${medicine}\n\n${q2_1Text}\n${q2_1_1Text}\n${q2_1_1}\n\n${q2_1_2Text}\n${q2_1_2}\n\n${q2_1_3Text}\n${q2_1_3}\n\n${q2_2Text}\n${q2_2}\n\n${q2_3Text}\n${q2_3}\n\n${q2_4Text}\n${q2_4}\n\n${q2_5Text}\n${q2_5}\n\nQ.その他質問事項等：${sonota}`;
+    const msg = `問診記入\n氏名：${username}\n生年月日：${birthday}\n身長：${height}cm\n体重：${weight}kg${weight_check}\n腹囲：${waist}cm${waist_check}\n最高血圧(収縮期血圧)：${bloodPressure_max}mmHg${bloodPressure_check}\n最低血圧(拡張期血圧)：${bloodPressure_min}mmHg${bloodPressure_check}\n取組状況：${meal}\n${exercise}\n${sonota_initiativeText}\n\n${q1_8Text}\n${kenshin_after}\n\n${q1_9Text}\n${medicine}\n\n${q2_1Text}\n${q2_1_1Text}\n${q2_1_1}\n\n${q2_1_2Text}\n${q2_1_2}\n\n${q2_1_3Text}\n${q2_1_3}\n\n${q2_2Text}\n${q2_2}\n\n${q2_3Text}\n${q2_3}\n\n${q2_4Text}\n${q2_4}\n\n${q2_5Text}\n${q2_5}\n\nQ.その他質問事項等：${sonota}`;
+    const medicine_msg = `問診記入\nお薬服用中\n氏名：${username}\n生年月日：${birthday}\n身長：${height}cm\n体重：${weight}kg${weight_check}\n腹囲：${waist}cm${waist_check}\n最高血圧(収縮期血圧)：${bloodPressure_max}mmHg${bloodPressure_check}\n最低血圧(拡張期血圧)：${bloodPressure_min}mmHg${bloodPressure_check}\n取組状況：${meal}\n${exercise}\n${sonota_initiativeText}\n\n${q1_8Text}\n${kenshin_after}\n\n${q1_9Text}\n${medicine}\n\n${q2_1Text}\n${q2_1_1Text}\n${q2_1_1}\n\n${q2_1_2Text}\n${q2_1_2}\n\n${q2_1_3Text}\n${q2_1_3}\n\n${q2_2Text}\n${q2_2}\n\n${q2_3Text}\n${q2_3}\n\n${q2_4Text}\n${q2_4}\n\n${q2_5Text}\n${q2_5}\n\nQ.その他質問事項等：${sonota}`;
 
     const jsonData_selectuser = JSON.stringify({
         line_uid: line_uid,
@@ -176,7 +236,7 @@ function sendResult() {
                         height: height,
                         weight: weight,
                         waist: waist,
-                        blood_pressure: bloodPressure
+                        blood_pressure: bloodPressure_max + '/' + bloodPressure_min
                     });
                     console.log('json.firstConsulFlg:' + json.firstConsulFlg);
                     // データベースにいない場合、新規追加する。

@@ -33,6 +33,7 @@ express()
   .post('/selectUser', (req, res) => selectUserInfo(req, res))
   .post('/insertUser', (req, res) => insertUserInfo(req, res))
   .post('/updateUser', (req, res) => updateUserInfo(req, res))
+  .post('/selectMonshin', (req, res) => selectMonshin(req, res))
   .listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 const getUserInfo = (req, res) => {
@@ -156,6 +157,36 @@ const updateUserInfo = (req, res) => {
       console.log('userを更新しました。');
       let message = 'userを更新しました';
       res.status(200).send({ message });
+    })
+    .catch(e => {
+      console.log(e);
+    })
+    .finally(() => {
+      req.connection.end;
+    })
+}
+
+// 最後の問診情報を取得する
+const selectMonshin = (req, res) => {
+  const data = req.body;
+  let monshin_umu = false; // false:レコードなし true:レコードあり
+  let latest_weight = '';
+  let latest_waist = '';
+  let latest_bloodPressure_max = '';
+  let latest_bloodPressure_min = '';
+  const select_query = {
+    text: `SELECT weight, waist, blood_pressure FROM users WHERE line_uid='${data.line_uid}' AND delete_flg=0`
+  };
+  connection.query(select_query)
+    .then((data) => {
+      if (data.rows.length > 0) {
+        monshin_umu = true;
+        latest_weight = data.rows[0].weight;
+        latest_waist = data.rows[0].waist;
+        latest_bloodPressure_max = data.rows[0].blood_pressure.substring(0, data.rows[0].blood_pressure.indexOf('/'));
+        latest_bloodPressure_min = data.rows[0].blood_pressure.substring(data.rows[0].blood_pressure.indexOf('/') + 1);
+      }
+      res.status(200).send({ monshin_umu, latest_weight, latest_waist, latest_bloodPressure_max, latest_bloodPressure_min });
     })
     .catch(e => {
       console.log(e);

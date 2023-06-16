@@ -40,9 +40,13 @@ window.onload = function () {
     } else {
         $('#waist_check').attr('checked', false);
     }
-    // 血圧
-    if (sessionStorage.getItem('bloodPressure') != null) {
-        $('#bloodPressure').val(sessionStorage.getItem('bloodPressure'));
+    // 血圧(最高)
+    if (sessionStorage.getItem('bloodPressure_max') != null) {
+        $('#bloodPressure_max').val(sessionStorage.getItem('bloodPressure_max'));
+    }
+    // 血圧(最低)
+    if (sessionStorage.getItem('bloodPressure_min') != null) {
+        $('#bloodPressure_min').val(sessionStorage.getItem('bloodPressure_min'));
     }
     // 血圧（変化有無）
     if (sessionStorage.getItem('bloodPressure_check') == '※変化なし') {

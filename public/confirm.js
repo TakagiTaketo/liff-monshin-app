@@ -34,11 +34,21 @@ window.onload = function () {
     } else {
         $('#waist_check').html('');
     }
-    // 血圧
-    if (sessionStorage.getItem('bloodPressure') != null) {
-        $('#bloodPressure').html(sessionStorage.getItem('bloodPressure') + 'mmHg');
+    // 血圧(最高)
+    if (sessionStorage.getItem('bloodPressure_max') != null) {
+        $('#bloodPressure_max').html(sessionStorage.getItem('bloodPressure_max') + 'mmHg');
     }
-    // 血圧（変化有無）
+    // 血圧(最低)
+    if (sessionStorage.getItem('bloodPressure_min') != null) {
+        $('#bloodPressure_min').html(sessionStorage.getItem('bloodPressure_min') + 'mmHg');
+    }
+    // 血圧(最高)（変化有無）
+    if (sessionStorage.getItem('bloodPressure_check') == '※変化なし') {
+        $('#bloodPressure_check').html('※変化なし')
+    } else {
+        $('#bloodPressure_check').html('');
+    }
+    // 血圧(最低)（変化有無）
     if (sessionStorage.getItem('bloodPressure_check') == '※変化なし') {
         $('#bloodPressure_check').html('※変化なし')
     } else {
