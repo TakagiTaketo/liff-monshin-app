@@ -171,6 +171,7 @@ const updateUserInfo = (req, res) => {
 
 // 最後の問診情報を取得する
 const selectMonshin = (req, res) => {
+  console.log('問診有無チェック');
   const data = req.body;
   let monshin_umu = false; // false:レコードなし true:レコードあり
   let latest_weight = '';
@@ -189,6 +190,10 @@ const selectMonshin = (req, res) => {
         latest_bloodPressure_max = data.rows[0].blood_pressure_max;
         latest_bloodPressure_min = data.rows[0].blood_pressure_min;
       }
+      console.log('latest_weight:' + latest_weight);
+      console.log('latest_waist:' + latest_waist);
+      console.log('latest_bloodPressure_max' + latest_bloodPressure_max);
+      console.log('latest_bloodPressure_min' + latest_bloodPressure_min);
       res.status(200).send({ monshin_umu, latest_weight, latest_waist, latest_bloodPressure_max, latest_bloodPressure_min });
     })
     .catch(e => {
