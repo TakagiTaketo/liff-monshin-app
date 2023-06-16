@@ -95,6 +95,7 @@ const selectUserInfo = (req, res) => {
 
 // ユーザー情報を追加する。
 const insertUserInfo = (req, res) => {
+  console.log('ユーザー情報を追加する。');
   const data = req.body;
   // タイムスタンプ整形
   let created_at = '';
@@ -114,7 +115,7 @@ const insertUserInfo = (req, res) => {
   console.log('data.blood_pressure_max:' + data.blood_pressure_max);
   console.log('data.blood_pressure_min:' + data.blood_pressure_min);
   const insert_query = {
-    text: `INSERT INTO users(line_uid, line_uname, name, birthday, height, weight, waist, blood_pressure_max, blood_pressure_min, created_at, delete_flg) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`,
+    text: `INSERT INTO users(line_uid, line_uname, name, birthday, height, weight, waist, blood_pressure_max, blood_pressure_min, created_at, delete_flg) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`,
     values: [data.line_uid, data.line_uname, data.name, data.birthday, data.height, data.weight, data.waist, data.blood_pressure_max, data.blood_pressure_min, created_at, 0]
   };
 
@@ -134,6 +135,7 @@ const insertUserInfo = (req, res) => {
 
 // ユーザー情報を更新する
 const updateUserInfo = (req, res) => {
+  console.log('ユーザー情報を更新する。');
   const data = req.body;
   // タイムスタンプ整形
   let updated_at = '';
