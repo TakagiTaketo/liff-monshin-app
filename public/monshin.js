@@ -93,11 +93,11 @@ window.addEventListener("DOMContentLoaded", () => {
                         })
                 })
                 .catch((err) => {
-                    alert(err);
+                    alert('LINEプロフィールの取得に失敗しました。\n' + err);
                 })
         })
         .catch((err) => {
-            alert(err);
+            alert('LIFFの初期化に失敗しました。\n' + err);
         });
 });
 // ログインチェック
@@ -130,7 +130,7 @@ function sendText(text) {
     ]).then(function () {
         liff.closeWindow();
     }).catch(function (error) {
-        window.alert('Failed to send message ' + error);
+        alert('メッセージの送信に失敗しました。\n ' + error);
     });
 }
 
@@ -270,7 +270,7 @@ function sendResult() {
                                 return false;
                             })
                             .catch((err) => {
-                                alert(err);
+                                alert('ユーザー情報の登録に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。\n' + err);
                             })
                     } else if (!json.firstConsulFlg
                         && (json.name != username || json.birthday != sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"))) {
@@ -281,33 +281,6 @@ function sendResult() {
                         $('#dialog_birthday_new').text(sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"));
                         dialog.showModal();
                         return false;
-                        //alert("氏名、生年月日が初回時に入力されたものと異なります。\nご確認ください。\n初回登録時\n氏名:" + json.name + "\n生年月日:" + json.birthday + "\n今回の入力\n氏名:" + username + "\n生年月日:" + sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0")
-                        //    + "変更する場合は");
-
-                    } else if (!json.firstConsulFlg
-                        && (json.name != username || json.birthday != sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"))) {
-                        // 新しい氏名・生年月日で更新する場合
-                        // データベースに存在する場合、更新する。
-                        fetch('/updateUser', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: jsonData,
-                            credentials: 'same-origin'
-                        })
-                            .then(() => {
-                                // メッセージ送信
-                                if (medicine == 'はい') {
-                                    sendText(medicine_msg);
-                                } else {
-                                    sendText(msg);
-                                }
-                                return false;
-                            })
-                            .catch((err) => {
-                                alert(err);
-                            })
 
                     } else if (!json.firstConsulFlg
                         && json.name == username && json.birthday == sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0")) {
@@ -330,17 +303,17 @@ function sendResult() {
                                 return false;
                             })
                             .catch((err) => {
-                                alert(err);
+                                alert('ユーザー情報の更新に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。\n' + err);
                             })
 
                     }
                 })
                 .catch((err) => {
-                    alert(err);
+                    alert('ユーザー情報の取得に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。\n' + err);
                 });
         })
         .catch((err) => {
-            alert(err);
+            alert('ユーザー情報の取得に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。\n' + err);
         });
 }
 
