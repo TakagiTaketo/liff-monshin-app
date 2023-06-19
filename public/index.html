@@ -25,9 +25,11 @@
             <p style="color: red; display: inline;">*</p>
             <div style="margin: 10px 0px 20px 20px;">
                 <input type="text" class="form-control" id="birthday_year" name="page01"
-                    style="width: 65px; height: 38px; display: inline;" pattern="^[0-9]+$" required>年
+                    style="width: 65px; height: 38px; display: inline;" pattern="^[0-9]+$"
+                    onchange="change_birthday_pull()" required>年
                 <input type="text" class="form-control" id="birthday_month" name="page01"
-                    style="width: 65px; height: 38px; display: inline;" pattern="^[0-9]+$" required>月
+                    style="width: 65px; height: 38px; display: inline;" pattern="^[0-9]+$"
+                    onchange="change_birthday_pull()" required>月
                 <input type="text" class="form-control" id="birthday_day" name="page01"
                     style="width: 65px; height: 38px; display: inline;" pattern="^[0-9]+$" required>日
             </div>
