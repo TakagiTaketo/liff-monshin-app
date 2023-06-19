@@ -520,3 +520,23 @@ function click_dialog_close() {
     dialog.close();
 }
 
+// 「変化なし」チェックボックスにチェックした時、前回の入力値を挿入する。
+function check_changing(checkbox) {
+    if (!$('#' + checkbox).prop('checked')) {
+        return false;
+    }
+    switch (checkbox) {
+        case 'weight_check':
+            $('#weight').val(latest_weight);
+            break;
+        case 'waist_check':
+            $('#waist').val(latest_waist);
+            break;
+        case 'bloodPressure_check':
+            $('#bloodPressure_max').val(latest_bloodPressure_max);
+            $('#bloodPressure_min').val(latest_bloodPressure_min);
+            break;
+        default:
+            console.log('未登録のチェックボックスです。');
+    }
+}

@@ -48,7 +48,8 @@
                     <p style="margin-top: 12px; display: inline-block;">前回の入力値：</p>
                     <p id="latest_weight" style="display: inline;"></p><span style="display: inline;">kg</span><br>
                     <input type="checkbox" id="weight_check"
-                        style="width: 20px; height: 20px; margin-top: 10px; display: inline-block;">
+                        style="width: 20px; height: 20px; margin-top: 10px; display: inline-block;"
+                        onchange="check_changing(this.id)">
                     <label for="weight_check" class="normal_fontsize"
                         style="margin-left: 10px; margin-top: 4px;">変化なし</label>
                 </div>
@@ -62,7 +63,8 @@
                     <p style="margin-top: 12px; display: inline-block;">前回の入力値：</p>
                     <p id="latest_waist" style="display: inline;"></p><span style="display: inline;">cm</span><br>
                     <input type="checkbox" id="waist_check"
-                        style="width: 20px; height: 20px; margin-top: 10px; display: inline-block;">
+                        style="width: 20px; height: 20px; margin-top: 10px; display: inline-block;"
+                        onchange="check_changing(this.id)">
                     <label for="waist_check" class="normal_fontsize"
                         style="margin-left: 10px; margin-top: 4px;">変化なし</label>
                 </div>
@@ -84,7 +86,8 @@
                     最低血圧:<p id="latest_bloodPressure_min" style="display: inline;"></p><span
                         style="display: inline;">mmHg</span><br>
                     <input type="checkbox" id="bloodPressure_check"
-                        style="width: 20px; height: 20px; margin-top: 10px; display: inline-block;">
+                        style="width: 20px; height: 20px; margin-top: 10px; display: inline-block;"
+                        onchange="check_changing(this.id)">
                     <label for="bloodPressure_check" class="normal_fontsize"
                         style="margin-left: 10px; margin-top: 4px;">変化なし</label>
                 </div>
