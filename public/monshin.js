@@ -470,6 +470,12 @@ function goConfirm() {
         && sessionStorage.getItem('weight') != ''
         && sessionStorage.getItem('kenshin_after') != ''
     ) {
+        // Q1-8が「はい」でQ1-9が未入力の場合
+        if (sessionStorage.getItem('kenshin_after') == 'はい'
+            && sessionStorage.getItem('medicine') == '') {
+            alert('Q1-8で「はい」を選択した場合、Q1-9をお答えください。');
+            return 0;
+        }
         location.href = '/confirm.html';
     } else {
         alert('ページ1の必須入力項目が未入力です。');
