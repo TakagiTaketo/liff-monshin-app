@@ -4,7 +4,7 @@ let latest_weight = '';
 let latest_waist = '';
 let latest_bloodPressure_max = '';
 let latest_bloodPressure_min = '';
-const liffId = "1660856020-9r4xpNbr";//
+const liffId = "1660856020-9r4xpNbr";
 let dialog = document.querySelector('dialog');
 let dialog_send = $('#dialog_send');
 let dialog_close = $('#dialog_close');
@@ -17,87 +17,15 @@ window.addEventListener("DOMContentLoaded", () => {
     })
         .then(() => {
             checkLogin();
-            const idtoken = liff.getIDToken();
-            const jsonData = JSON.stringify({
-                id_token: idtoken
-            });
-            // LINEプロフィール取得
-            fetch('/api', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: jsonData,
-                creadentials: 'same-origin'
-            })
-                .then(res => {
-                    res.json()
-                        .then(json => {
-                            console.log('json:' + json);
-                            line_uname = json.line_uname;
-                            line_uid = json.line_uid;
-
-                            // 最後の問診データを取得する
-                            const jsonData = JSON.stringify({
-                                line_uid: line_uid
-                            });
-                            fetch('/selectMonshin', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: jsonData,
-                                creadentials: 'same-origin'
-                            })
-                                .then(res => {
-                                    res.json()
-                                        .then(json => {
-                                            let monshin_umu = json.monshin_umu;
-                                            latest_weight = json.latest_weight;
-                                            latest_waist = json.latest_waist;
-                                            latest_bloodPressure_max = json.latest_bloodPressure_max;
-                                            latest_bloodPressure_min = json.latest_bloodPressure_min;
-                                            console.log('latest_weight:' + monshin_umu);
-                                            console.log('latest_weight:' + latest_weight);
-                                            console.log('latest_waist:' + latest_waist);
-                                            console.log('latest_bloodPressure_max:' + latest_bloodPressure_max);
-                                            console.log('latest_bloodPressure_min:' + latest_bloodPressure_min);
-
-                                            let changing_checks = document.getElementsByName('changing_check');
-                                            if (monshin_umu) {
-                                                // 入力がなかった時、入力なしとする
-                                                if (latest_weight == '') {
-                                                    latest_weight = '入力なし';
-                                                } else if (latest_waist == '') {
-                                                    latest_waist = '入力なし';
-                                                } else if (latest_bloodPressure_max == '') {
-                                                    latest_bloodPressure_max = '入力なし';
-                                                } else if (latest_bloodPressure_min == '') {
-                                                    latest_bloodPressure_min = '入力なし';
-                                                }
-
-                                                for (let i = 0; i < changing_checks.length; i++) {
-                                                    changing_checks[i].style.display = "block";
-                                                }
-                                                document.getElementById('latest_weight').innerText = latest_weight;
-                                                document.getElementById('latest_waist').innerText = latest_waist;
-                                                document.getElementById('latest_bloodPressure_max').innerText = latest_bloodPressure_max;
-                                                document.getElementById('latest_bloodPressure_min').innerText = latest_bloodPressure_min;
-                                            } else {
-                                                for (let i = 0; i < changing_checks.length; i++) {
-                                                    changing_checks[i].style.display = "none";
-                                                }
-                                            }
-                                        })
-                                })
-                        })
-                })
-                .catch((err) => {
-                    alert('LINEプロフィールの取得に失敗しました。\n' + err);
-                })
+            selectMonshin();
         })
         .catch((err) => {
-            alert('LIFFの初期化に失敗しました。\n' + err);
+            let dialog_error = document.getElementById('dialog_error'); // エラーメッセージダイアログ
+            let dialog_error_msg = document.getElementById('dialog_error_msg'); // エラーメッセージ内容
+            dialog_error_msg.innerText = 'LIFFの初期化に失敗しました。\n' + err;
+            dialog_error.showModal();                
+
+            //alert('LIFFの初期化に失敗しました。\n' + err);
         });
 });
 // ログインチェック
@@ -130,7 +58,11 @@ function sendText(text) {
     ]).then(function () {
         liff.closeWindow();
     }).catch(function (error) {
-        alert('メッセージの送信に失敗しました。\n ' + error);
+        //alert('メッセージの送信に失敗しました。\n ' + error);
+        let dialog_error = document.getElementById('dialog_error'); // エラーメッセージダイアログ
+        let dialog_error_msg = document.getElementById('dialog_error_msg'); // エラーメッセージ内容
+        dialog_error_msg.innerText = 'メッセージの送信に失敗しました。\n ' + error;
+        dialog_error.showModal();
     });
 }
 
@@ -151,7 +83,7 @@ $(function () {
     });
 });
 // 送信ボタン押下時処理
-function sendResult() {
+async function sendResult() {
     // Page1
     // 氏名
     const username = sessionStorage.getItem('username');
@@ -219,14 +151,14 @@ function sendResult() {
     // メッセージ作成
     const msg = `問診記入\n氏名：${username}\n生年月日：${birthday}\n身長：${height}cm\n体重：${weight}kg${weight_check}\n腹囲：${waist}cm${waist_check}\n最高血圧(収縮期血圧)：${bloodPressure_max}mmHg\n最低血圧(拡張期血圧)：${bloodPressure_min}mmHg\n${bloodPressure_check}\n取組状況：${meal}\n${exercise}\n${sonota_initiativeText}\n\n${q1_8Text}\n${kenshin_after}\n\n${q1_9Text}\n${medicine}\n\n${q2_1Text}\n${q2_1_1Text}\n${q2_1_1}\n\n${q2_1_2Text}\n${q2_1_2}\n\n${q2_1_3Text}\n${q2_1_3}\n\n${q2_2Text}\n${q2_2}\n\n${q2_3Text}\n${q2_3}\n\n${q2_4Text}\n${q2_4}\n\n${q2_5Text}\n${q2_5}\n\nQ.その他質問事項等：${sonota}`;
     const medicine_msg = `問診記入\nお薬服用中\n氏名：${username}\n生年月日：${birthday}\n身長：${height}cm\n体重：${weight}kg${weight_check}\n腹囲：${waist}cm${waist_check}\n最高血圧(収縮期血圧)：${bloodPressure_max}mmHg\n最低血圧(拡張期血圧)：${bloodPressure_min}mmHg\n${bloodPressure_check}\n取組状況：${meal}\n${exercise}\n${sonota_initiativeText}\n\n${q1_8Text}\n${kenshin_after}\n\n${q1_9Text}\n${medicine}\n\n${q2_1Text}\n${q2_1_1Text}\n${q2_1_1}\n\n${q2_1_2Text}\n${q2_1_2}\n\n${q2_1_3Text}\n${q2_1_3}\n\n${q2_2Text}\n${q2_2}\n\n${q2_3Text}\n${q2_3}\n\n${q2_4Text}\n${q2_4}\n\n${q2_5Text}\n${q2_5}\n\nQ.その他質問事項等：${sonota}`;
-
+    const idToken = liff.getIDToken();
     const jsonData_selectuser = JSON.stringify({
-        line_uid: line_uid,
+        idToken: idToken,
         name: username,
         birthday: sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0")
     });
     // データベースに存在するかチェックする
-    fetch('/selectUser', {
+    await fetch('/selectUser', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -237,10 +169,10 @@ function sendResult() {
         .then(res => {
             res.json()
                 .then(json => {
+                    const idToken = liff.getIDToken();
                     // jsonData作成
                     const jsonData = JSON.stringify({
-                        line_uid: line_uid,
-                        line_uname: line_uname,
+                        idToken: idToken,
                         name: username,
                         birthday: sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"),
                         height: height,
@@ -260,17 +192,30 @@ function sendResult() {
                             body: jsonData,
                             credentials: 'same-origin'
                         })
-                            .then(() => {
+                            .then(response => {
+                                // レスポンスのステータスコードをチェック
+                                if (!response.ok) {
+                                    // サーバーからのエラーレスポンスを処理
+                                    return response.json().then(error => Promise.reject(error));
+                                }
+                                // ステータスコードが OK の場合、レスポンスをJSONとして解析
+                                return response.json();
+                            })
+                            .then(data => {
                                 // メッセージ送信
                                 if (medicine == 'はい') {
                                     sendText(medicine_msg);
                                 } else {
-                                    sendText(msg);
+                                    sendText(data.msg);
                                 }
                                 return false;
                             })
-                            .catch((err) => {
-                                alert('ユーザー情報の登録に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。\n' + err);
+                            .catch(error => {
+                                let dialog_error = document.getElementById('dialog_error'); // エラーメッセージダイアログ
+                                let dialog_error_msg = document.getElementById('dialog_error_msg'); // エラーメッセージ内容
+                                dialog_error_msg.innerText = error.error;
+                                dialog_error.showModal();                
+                                //alert('ユーザー情報の登録に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。\n' + err);
                             })
                     } else if (!json.firstConsulFlg
                         && (json.name != username || json.birthday != sessionStorage.getItem('birthday_year') + '-' + sessionStorage.getItem('birthday_month').toString().padStart(2, "0") + '-' + sessionStorage.getItem('birthday_day').toString().padStart(2, "0"))) {
@@ -293,27 +238,48 @@ function sendResult() {
                             body: jsonData,
                             credentials: 'same-origin'
                         })
-                            .then(() => {
+                            .then(response => {
+                                // レスポンスのステータスコードをチェック
+                                if (!response.ok) {
+                                    // サーバーからのエラーレスポンスを処理
+                                    return response.json().then(error => Promise.reject(error));
+                                }
+                                // ステータスコードが OK の場合、レスポンスをJSONとして解析
+                                return response.json();
+                            })
+                            .then(data => {
                                 // メッセージ送信
                                 if (medicine == 'はい') {
                                     sendText(medicine_msg);
                                 } else {
-                                    sendText(msg);
+                                    sendText(data.msg);
                                 }
                                 return false;
                             })
-                            .catch((err) => {
-                                alert('ユーザー情報の更新に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。\n' + err);
+                            .catch(error => {
+                                //alert('ユーザー情報の更新に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。\n' + err);
+                                let dialog_error = document.getElementById('dialog_error'); // エラーメッセージダイアログ
+                                let dialog_error_msg = document.getElementById('dialog_error_msg'); // エラーメッセージ内容
+                                dialog_error_msg.innerText = error.error;
+                                dialog_error.showModal();                                    
                             })
 
                     }
                 })
                 .catch((err) => {
-                    alert('ユーザー情報の取得に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。\n' + err);
+                    //alert('ユーザー情報の取得に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。\n' + err);
+                    let dialog_error = document.getElementById('dialog_error'); // エラーメッセージダイアログ
+                    let dialog_error_msg = document.getElementById('dialog_error_msg'); // エラーメッセージ内容
+                    dialog_error_msg.innerText = 'ユーザー情報の取得に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。\n';
+                    dialog_error.showModal();                        
                 });
         })
         .catch((err) => {
-            alert('ユーザー情報の取得に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。\n' + err);
+            //alert('ユーザー情報の取得に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。\n' + err);
+            let dialog_error = document.getElementById('dialog_error'); // エラーメッセージダイアログ
+            let dialog_error_msg = document.getElementById('dialog_error_msg'); // エラーメッセージ内容
+            dialog_error_msg.innerText = 'ユーザー情報の取得に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。\n';
+            dialog_error.showModal();                                    
         });
 }
 
@@ -473,12 +439,20 @@ function goConfirm() {
         // Q1-8が「はい」でQ1-9が未入力の場合
         if (sessionStorage.getItem('kenshin_after') == 'はい'
             && sessionStorage.getItem('medicine') == '') {
-            alert('Q1-8で「はい」を選択した場合、Q1-9をお答えください。');
+            //alert('Q1-8で「はい」を選択した場合、Q1-9をお答えください。');
+            let dialog_error = document.getElementById('dialog_error'); // エラーメッセージダイアログ
+            let dialog_error_msg = document.getElementById('dialog_error_msg'); // エラーメッセージ内容
+            dialog_error_msg.innerText = 'Q1-8で「はい」を選択した場合、Q1-9をお答えください。';
+            dialog_error.showModal();                            
             return 0;
         }
         location.href = '/confirm.html';
     } else {
-        alert('ページ1の必須入力項目が未入力です。');
+        //alert('ページ1の必須入力項目が未入力です。');
+        let dialog_error = document.getElementById('dialog_error'); // エラーメッセージダイアログ
+        let dialog_error_msg = document.getElementById('dialog_error_msg'); // エラーメッセージ内容
+        dialog_error_msg.innerText = 'ページ1の必須入力項目が未入力です。';
+        dialog_error.showModal();                        
     }
 }
 // Q8で「はい」を選択した時、Q9を活性化する。いいえの時は非活性とする。
@@ -575,4 +549,69 @@ function setpull_birthday_day() {
 // 生年月日プルダウンの年、月が変更された時、日のプルダウンを再生成する。
 function change_birthday_pull() {
     setpull_birthday_day();
+}
+
+async function selectMonshin(){
+    const idToken = await liff.getIDToken();
+    // 最後の問診データを取得する
+    const jsonData = JSON.stringify({
+        idToken: idToken
+    });
+    await fetch('/selectMonshin', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: jsonData,
+        creadentials: 'same-origin'
+    })
+        .then(response => {
+            // レスポンスのステータスコードをチェック
+            if (!response.ok) {
+                // サーバーからのエラーレスポンスを処理
+                return response.json().then(error => Promise.reject(error));
+            }
+            // ステータスコードが OK の場合、レスポンスをJSONとして解析
+            return response.json();
+        })
+        .then(json => {
+            let monshin_umu = json.monshin_umu;
+            let latest_weight = json.latest_weight;
+            let latest_waist = json.latest_waist;
+            let latest_bloodPressure_max = json.latest_bloodPressure_max;
+            let latest_bloodPressure_min = json.latest_bloodPressure_min;
+
+            let changing_checks = document.getElementsByName('changing_check');
+            if (monshin_umu) {
+                // 入力がなかった時、入力なしとする
+                if (latest_weight == '') {
+                    latest_weight = '入力なし';
+                } else if (latest_waist == '') {
+                    latest_waist = '入力なし';
+                } else if (latest_bloodPressure_max == '') {
+                    latest_bloodPressure_max = '入力なし';
+                } else if (latest_bloodPressure_min == '') {
+                    latest_bloodPressure_min = '入力なし';
+                }
+
+                for (let i = 0; i < changing_checks.length; i++) {
+                    changing_checks[i].style.display = "block";
+                }
+                document.getElementById('latest_weight').innerText = latest_weight;
+                document.getElementById('latest_waist').innerText = latest_waist;
+                document.getElementById('latest_bloodPressure_max').innerText = latest_bloodPressure_max;
+                document.getElementById('latest_bloodPressure_min').innerText = latest_bloodPressure_min;
+            } else {
+                for (let i = 0; i < changing_checks.length; i++) {
+                    changing_checks[i].style.display = "none";
+                }
+            }
+        })
+        .catch(error =>{
+            console.error(error.error);
+            let dialog_error = document.getElementById('dialog_error'); // エラーメッセージダイアログ
+            let dialog_error_msg = document.getElementById('dialog_error_msg'); // エラーメッセージ内容
+            dialog_error_msg.innerText = error.error;
+            dialog_error.showModal();                        
+        });
 }
