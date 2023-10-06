@@ -472,9 +472,13 @@ function displayQ9(value) {
 }
 
 
-// ダイアログの閉じるボタン押下時
+// ダイアログの閉じるボタン押下時、開いているダイアログを全て閉じる。
 function click_dialog_close() {
-    dialog.close();
+    let dialogs = document.querySelectorAll('dialog');
+    for (let item of dialogs) {
+        item.close();
+    }
+    return false;
 }
 
 // 「変化なし」チェックボックスにチェックした時、前回の入力値を挿入する。
