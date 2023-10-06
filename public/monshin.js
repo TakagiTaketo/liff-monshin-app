@@ -611,10 +611,12 @@ async function selectMonshin(){
             }
         })
         .catch(error =>{
-            console.error(error.error);
-            let dialog_error = document.getElementById('dialog_error'); // エラーメッセージダイアログ
-            let dialog_error_msg = document.getElementById('dialog_error_msg'); // エラーメッセージ内容
-            dialog_error_msg.innerText = error.error;
-            dialog_error.showModal();                        
+            if(error.error){
+                console.error(error.error);
+                let dialog_error = document.getElementById('dialog_error'); // エラーメッセージダイアログ
+                let dialog_error_msg = document.getElementById('dialog_error_msg'); // エラーメッセージ内容
+                dialog_error_msg.innerText = error.error;
+                dialog_error.showModal();       
+            }                 
         });
 }
