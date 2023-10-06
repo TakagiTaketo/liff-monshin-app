@@ -204,12 +204,12 @@ async function sendResult() {
                                 // ステータスコードが OK の場合、レスポンスをJSONとして解析
                                 return response.json();
                             })
-                            .then(data => {
+                            .then(() => {
                                 // メッセージ送信
                                 if (medicine == 'はい') {
                                     sendText(medicine_msg);
                                 } else {
-                                    sendText(data.msg);
+                                    sendText(msg);
                                 }
                                 return false;
                             })
@@ -250,12 +250,12 @@ async function sendResult() {
                                 // ステータスコードが OK の場合、レスポンスをJSONとして解析
                                 return response.json();
                             })
-                            .then(data => {
+                            .then(() => {
                                 // メッセージ送信
                                 if (medicine == 'はい') {
                                     sendText(medicine_msg);
                                 } else {
-                                    sendText(data.msg);
+                                    sendText(msg);
                                 }
                                 return false;
                             })
@@ -607,10 +607,17 @@ async function selectMonshin(){
                 for (let i = 0; i < changing_checks.length; i++) {
                     changing_checks[i].style.display = "block";
                 }
-                document.getElementById('latest_weight').innerText = latest_weight;
-                document.getElementById('latest_waist').innerText = latest_waist;
-                document.getElementById('latest_bloodPressure_max').innerText = latest_bloodPressure_max;
-                document.getElementById('latest_bloodPressure_min').innerText = latest_bloodPressure_min;
+                
+                if (document.getElementById("latest_weight") &&
+                  document.getElementById("latest_waist") &&
+                  document.getElementById("latest_bloodPressure_max") &&
+                  document.getElementById("latest_bloodPressure_min")) 
+                {
+                  document.getElementById("latest_weight").innerText = latest_weight;
+                  document.getElementById("latest_waist").innerText = latest_waist;
+                  document.getElementById("latest_bloodPressure_max").innerText = latest_bloodPressure_max;
+                  document.getElementById("latest_bloodPressure_min").innerText = latest_bloodPressure_min;
+                }
             } else {
                 for (let i = 0; i < changing_checks.length; i++) {
                     changing_checks[i].style.display = "none";
