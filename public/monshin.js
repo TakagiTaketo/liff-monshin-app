@@ -96,13 +96,16 @@ async function sendResult() {
     // 体重（変化有無）
     const weight_check = sessionStorage.getItem('weight_check');
     // 腹囲
-    const waist = sessionStorage.getItem('waist');
+    let waist = '';
+    waist = sessionStorage.getItem('waist');
     // 腹囲（変化有無）
     const waist_check = sessionStorage.getItem('waist_check');
     // 血圧(最高)
-    const bloodPressure_max = sessionStorage.getItem('bloodPressure_max');
+    let bloodPressure_max = '';
+    bloodPressure_max = sessionStorage.getItem('bloodPressure_max');
     // 血圧(最低)
-    const bloodPressure_min = sessionStorage.getItem('bloodPressure_min');
+    let bloodPressure_min = '';
+    bloodPressure_min = sessionStorage.getItem('bloodPressure_min');
     // 血圧（変化有無）
     const bloodPressure_check = sessionStorage.getItem('bloodPressure_check');
 
