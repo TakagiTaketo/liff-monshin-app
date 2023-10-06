@@ -76,9 +76,9 @@ const selectUserInfo = async(req, res) => {
         console.log('selectUserInfoのbirthday:' + birthday);
         console.log('selectUserInfoのfirstConsulFlg:' + firstConsulFlg);
         res.status(200).send({ 
-          firstConsulFlg,
-          name,
-          birthday
+          firstConsulFlg: firstConsulFlg,
+          name: name,
+          birthday: birthday
         });
       })
       .catch(e => console.error(e.message));
@@ -208,11 +208,11 @@ const selectMonshin = async (req, res) => {
         console.log("latest_bloodPressure_max" + latest_bloodPressure_max);
         console.log("latest_bloodPressure_min" + latest_bloodPressure_min);
         res.status(200).send({
-            monshin_umu,
-            latest_weight,
-            latest_waist,
-            latest_bloodPressure_max,
-            latest_bloodPressure_min
+            monshin_umu: monshin_umu,
+            latest_weight: latest_weight,
+            latest_waist: latest_waist,
+            latest_bloodPressure_max: latest_bloodPressure_max,
+            latest_bloodPressure_min: latest_bloodPressure_min
         });
       })
       .catch((e) => {

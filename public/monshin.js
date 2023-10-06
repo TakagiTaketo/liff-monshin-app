@@ -582,10 +582,10 @@ async function selectMonshin(){
         })
         .then(json => {
             let monshin_umu = json.monshin_umu;
-            let latest_weight = json.latest_weight;
-            let latest_waist = json.latest_waist;
-            let latest_bloodPressure_max = json.latest_bloodPressure_max;
-            let latest_bloodPressure_min = json.latest_bloodPressure_min;
+            latest_weight = json.latest_weight;
+            latest_waist = json.latest_waist;
+            latest_bloodPressure_max = json.latest_bloodPressure_max;
+            latest_bloodPressure_min = json.latest_bloodPressure_min;
 
             let changing_checks = document.getElementsByName('changing_check');
             if (monshin_umu) {
