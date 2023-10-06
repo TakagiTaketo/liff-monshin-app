@@ -212,8 +212,8 @@ const selectMonshin = async (req, res) => {
             monshin_umu: monshin_umu,
             latest_weight: latest_weight,
             latest_waist: latest_waist,
-            latest_bloodPressure_max: blood_pressure_max,
-            latest_bloodPressure_min: blood_pressure_min
+            latest_bloodPressure_max: latest_bloodPressure_max,
+            latest_bloodPressure_min: latest_bloodPressure_min
           });
       })
       .catch((e) => {
