@@ -119,16 +119,9 @@ const insertUserInfo = async(req, res) => {
       values: [userinfo.line_uid, userinfo.line_uname, data.name, data.birthday, data.height, data.weight, data.waist, data.blood_pressure_max, data.blood_pressure_min, created_at, 0]
     };
 
-    pool.query(insert_query)
-      .then(() => {
-        console.log('userを追加しました。');
-        let message = 'userを追加しました';
-        res.status(200).send({ meg: message });
-      })
-      .catch(e => {
-        console.error(e.message);
-        res.status(500).send({ error: 'ユーザー情報の登録に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。'});
-      })
+    await pool.query(insert_query);
+    console.log('userを追加しました。');
+    res.status(200).send({ meg: "userを追加しました"});
   }catch(e){
     console.error(e.message);
     res.status(500).send({ error: 'ユーザー情報の登録に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。'});
@@ -160,16 +153,9 @@ const updateUserInfo = async(req, res) => {
       text: `UPDATE users SET height=$1, weight=$2, waist=$3, blood_pressure_max=$4, blood_pressure_min=$5, updated_at=$6 WHERE line_uid=$7 AND delete_flg=0;`,
       values: [data.height, data.weight, data.waist, data.blood_pressure_max, data.blood_pressure_min, updated_at, userinfo.line_uid]
     };
-    await pool.query(update_query)
-      .then(() => {
-        console.log('userを更新しました。');
-        let message = 'userを更新しました';
-        res.status(200).send({ msg:message });
-      })
-      .catch(e => {
-        console.error(e.message);
-        res.status(500).send({ error: 'ユーザー情報の更新に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。'});
-      })
+    await pool.query(update_query);
+    console.log('userを更新しました。');
+    res.status(200).send({ msg: "userを更新しました" });
   }catch(e){
     console.error(e.message);
     res.status(500).send({ error: 'ユーザー情報の更新に失敗しました。\nお手数をおかけして申し訳ございませんが、一度画面を閉じてから再度入力をお願いいたします。'});
@@ -239,10 +225,10 @@ const verifyIdTokenAndGetUserInfo = async (idToken) => {
     const data = await response.json();
     return {
       line_uid: data.sub,
-      line_uname: data.name,
+      line_uname: data.name
     };
   } catch (e) {
     console.error(e.message);
-    throw new Error("Failed to verify ID token or fetch user info");
+    throw new Error("ユーザー情報の取得に失敗しました。");
   }
 };
